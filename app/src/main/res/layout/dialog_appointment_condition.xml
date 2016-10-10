@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons_layout"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_patient_condition_mobility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/input_field_vertical_margin"
+                    android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                    android:hint="description"
+                    android:inputType="text"
+                    android:paddingBottom="@dimen/input_field_vertical_padding"
+                    android:paddingLeft="@dimen/input_field_horizontal_padding"
+                    android:paddingStart="@dimen/input_field_horizontal_padding"
+                    android:lines="4"
+                    android:minLines="4" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_element_non_edit_horizontal"
+                    android:layout_marginStart="@dimen/margin_element_non_edit_horizontal"
+                    android:layout_marginTop="@dimen/input_field_vertical_margin"
+                    android:paddingBottom="@dimen/input_field_vertical_padding"
+                    android:text="@string/amount_to_pay"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_list_item_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_rate_final"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/input_field_vertical_margin"
+                    android:paddingBottom="@dimen/input_field_vertical_padding"
+                    android:text="60 RM"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_list_item_normal"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_patient_condition_cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryLight"
+            android:text="@string/cancel"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/btn_patient_condition_confirm"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="@string/confirm"
+            android:textColor="#fff" />
+
+    </LinearLayout>
+
+</RelativeLayout>

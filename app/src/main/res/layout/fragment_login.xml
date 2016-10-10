@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/back"
+    tools:context="com.example.admin.healthcarepersonnel.LoginActivity">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#d2000003"
+        android:padding="10dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0"
+            android:id="@+id/tableLayout"
+            android:layout_alignParentStart="true"
+            android:minHeight="5dp"
+            android:dividerPadding="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true"
+            android:paddingTop="100dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp">
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp" >
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_username"
+                    android:layout_width="match_parent"
+                    android:theme="@style/TextLabel"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/input_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Username"
+                        android:textColor="#ffffff" />
+                </android.support.design.widget.TextInputLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layput_pwd"
+                    android:layout_width="match_parent"
+                    android:theme="@style/TextLabel"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/input_pwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:textColor="#ffffff"
+                        android:inputType="textPassword" />
+                </android.support.design.widget.TextInputLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp">
+
+                <Button
+                    android:text="Login"
+                    android:id="@+id/btnLogin"
+                    android:bottomRightRadius="20dp"
+                    android:bottomLeftRadius="20dp"
+                    android:topLeftRadius="20dp"
+                    android:topRightRadius="20dp"
+                    android:layout_column="0"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="14dp"
+                    android:textColor="#ffffff" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="Can&apos;t access your account ?"
+                    android:id="@+id/textView2"
+                    android:layout_column="0"
+                    android:textColor="#ffffff"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="italic"
+                    android:layout_gravity="center_horizontal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </TableRow>
+
+        </TableLayout>
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,202 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.PatientRegistrationFragment">
+
+    <ScrollView
+        android:layout_above="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <EditText
+                android:id="@+id/edit_patient_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_account_circle_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_account_circle_24dp_color_primary"
+                android:hint="@string/full_name"
+                android:inputType="text"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+            <EditText
+                android:id="@+id/edit_patient_nric"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_contacts_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_contacts_24dp_color_primary"
+                android:hint="@string/nric"
+                android:inputType="text"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+            <EditText
+                android:id="@+id/edit_patient_relationship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_group_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_group_24dp_color_primary"
+                android:hint="@string/relationship"
+                android:inputType="text"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edit_patient_dob"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="false"
+                    android:layout_marginTop="@dimen/input_field_vertical_margin"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_cake_24dp_color_primary"
+                    android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                    android:drawableStart="@drawable/ic_cake_24dp_color_primary"
+                    android:hint="@string/date_of_birth"
+                    android:inputType="none"
+                    android:paddingBottom="@dimen/input_field_vertical_padding"
+                    android:paddingLeft="@dimen/input_field_horizontal_padding"
+                    android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+                <Spinner
+                    android:id="@+id/spinner_patient_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/input_field_vertical_margin"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_gender_male_female_24dp_color_primary"
+                    android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                    android:drawableStart="@drawable/ic_gender_male_female_24dp_color_primary"
+                    android:paddingBottom="@dimen/input_field_vertical_padding"
+                    android:paddingLeft="@dimen/input_field_horizontal_padding"
+                    android:paddingStart="@dimen/input_field_horizontal_padding" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edit_patient_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_home_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_home_24dp_color_primary"
+                android:hint="@string/address"
+                android:inputType="textPostalAddress"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+            <EditText
+                android:id="@+id/edit_patient_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_public_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_public_24dp_color_primary"
+                android:hint="@string/country"
+                android:inputType="none"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+            <EditText
+                android:id="@+id/edit_patient_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_location_city_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_location_city_24dp_color_primary"
+                android:hint="@string/state"
+                android:inputType="none"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+            <EditText
+                android:id="@+id/edit_patient_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_city_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_city_24dp_color_primary"
+                android:hint="@string/city"
+                android:inputType="none"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+            <EditText
+                android:id="@+id/edit_patient_postcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_mailbox_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_mailbox_24dp_color_primary"
+                android:hint="@string/postcode"
+                android:inputType="none"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_patient_cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_action_height"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryLight"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/btn_patient_register"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_action_height"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="@string/register" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AppointmentsFragment">
+
+    <ListView
+        android:id="@+id/list_appointments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/linear_empty_list_appointments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:text="@string/you_have_no_appointments_booked_yet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_text_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/tap_on"
+                android:layout_marginRight="@dimen/hint_drawable_padding_horizontal"
+                android:layout_marginEnd="@dimen/hint_drawable_padding_horizontal"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/ic_note_add_24dp_color_text_secondary"
+                android:drawableStart="@drawable/ic_note_add_24dp_color_text_secondary"
+                android:drawablePadding="@dimen/hint_drawable_padding_horizontal"
+                android:text="@string/to_book_for_appointments"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

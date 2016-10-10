@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AppointmentDetailsActivity">
+    <item
+        android:id="@+id/menu_appointment_submit_feedback"
+        android:orderInCategory="101"
+        android:title="@string/submit_feedback"
+        android:icon="@drawable/ic_comment_24dp_color_text_icon"
+        app:showAsAction="ifRoom" />
+</menu>

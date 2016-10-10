@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".fragments.PractitionerDetailsFragment">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_app_details_practitioner_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_account_circle_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_account_circle_24dp_color_primary"
+            android:hint="@string/practitioner_name"
+            android:inputType="text"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_app_details_practitioner_nric"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_contacts_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_contacts_24dp_color_primary"
+            android:hint="@string/nric"
+            android:inputType="date"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_app_details_practitioner_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_call_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_call_24dp_color_primary"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_call_practitioner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/call"
+        android:textColor="@color/colorTextIcon"
+        android:background="@color/colorAccent"
+        android:layout_gravity="end"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Navigate To Address"
+        android:textColor="@color/colorTextIcon"
+        android:background="@color/colorAccent"
+        android:layout_gravity="right"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible" />
+
+</LinearLayout>

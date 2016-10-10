@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".fragments.MyAccountFragment">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_account_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_account_circle_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_account_circle_24dp_color_primary"
+            android:hint="@string/full_name"
+            android:inputType="text"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_account_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_email_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_email_24dp_color_primary"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_account_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_call_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_call_24dp_color_primary"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_account_creditcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_credit_card_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_credit_card_24dp_color_primary"
+            android:hint="@string/credit_card_number"
+            android:inputType="numberDecimal"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

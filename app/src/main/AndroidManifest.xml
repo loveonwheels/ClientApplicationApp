@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mSIHAT.client" android:windowSoftInputMode="stateVisible|adjustPan">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.mSIHAT.client.LoginActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.mSIHAT.client.SignupActivity"
+            android:label="@string/title_activity_signup"
+            android:parentActivityName="com.mSIHAT.client.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mSIHAT.client.LoginActivity" />
+        </activity>
+        <activity
+            android:name="com.mSIHAT.client.MainActivity"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.mSIHAT.client.NewAppointmentActivity"
+            android:label="@string/title_activity_new_appointment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.mSIHAT.client.AppointmentDetailsActivity"
+            android:label="@string/title_activity_appointment_details"
+            android:parentActivityName="com.mSIHAT.client.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.mSIHAT.client.DetailsActivity"
+            android:label="@string/title_activity_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.mSIHAT.client.UpdateDetailsActivity"
+            android:label="@string/title_activity_register_patient"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.mSIHAT.client.SplashScreen"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mSIHAT.client.AvailablePractitionersActivity"
+            android:label="@string/title_activity_available_practitioners"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.mSIHAT.client.ListActivity"
+            android:label="@string/appointments"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.mSIHAT.client.StartingActivity"
+            android:label="@string/title_activity_starting"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".fragments.AppointmentDetailsFragment">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_app_details_subservice_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_assignment_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_assignment_24dp_color_primary"
+            android:hint="@string/subservice"
+            android:inputType="text"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_app_details_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_today_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_today_24dp_color_primary"
+            android:hint="@string/appointment_date"
+            android:inputType="date"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_app_details_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_alarm_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_alarm_24dp_color_primary"
+            android:hint="@string/appointment_time"
+            android:inputType="time"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:layout_marginTop="@dimen/margin_element_seperated_vertical"
+        android:layout_marginLeft="@dimen/margin_element_non_edit_horizontal"
+        android:text="Status"
+        android:textColor="@color/colorTextPrimary"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_list_item_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_element_header_of_vertical"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:layout_marginLeft="@dimen/margin_element_non_edit_horizontal"
+        android:layout_marginRight="@dimen/margin_element_non_edit_horizontal"
+        android:id="@+id/progress_appointment_status"
+        android:progressBackgroundTint="@color/colorTabTextNegative"
+        android:layout_gravity="center_horizontal"
+        android:max="3"
+        android:progress="1"/>
+
+    <TextView
+        android:id="@+id/text_appointment_status"
+        android:layout_marginLeft="@dimen/margin_element_non_edit_horizontal"
+        android:text="placeholder"
+        android:textSize="@dimen/text_size_list_item_secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_element_header_of_vertical"/>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Service Completed"
+        android:textColor="@color/colorTextIcon"
+        android:background="@color/colorAccent"
+        android:layout_gravity="right"
+        android:layout_marginTop="5dp" />
+
+
+</LinearLayout>

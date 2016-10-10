@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <EditText
+        android:id="@+id/edit_newapp_single_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/input_field_vertical_margin"
+        android:drawableLeft="@drawable/ic_today_24dp_color_primary"
+        android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+        android:drawableStart="@drawable/ic_today_24dp_color_primary"
+        android:focusableInTouchMode="false"
+        android:hint="@string/appointment_date"
+        android:inputType="date"
+        android:paddingBottom="@dimen/input_field_vertical_padding"
+        android:paddingLeft="@dimen/input_field_horizontal_padding"
+        android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    <EditText
+        android:id="@+id/edit_newapp_single_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/input_field_vertical_margin"
+        android:drawableLeft="@drawable/ic_alarm_24dp_color_primary"
+        android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+        android:drawableStart="@drawable/ic_alarm_24dp_color_primary"
+        android:focusableInTouchMode="false"
+        android:hint="@string/appointment_time"
+        android:inputType="time"
+        android:paddingBottom="@dimen/input_field_vertical_padding"
+        android:paddingLeft="@dimen/input_field_horizontal_padding"
+        android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_newapp_single_cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/cancel"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_newapp_single_confirm"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="@string/confirm"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+</LinearLayout>

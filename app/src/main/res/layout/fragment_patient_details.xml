@@ -1,0 +1,123 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".fragments.PatientDetailsFragment">
+
+    <LinearLayout
+        android:id="@+id/linear_patient_details_fields"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_patient_details_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_account_circle_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_account_circle_24dp_color_primary"
+            android:hint="@string/full_name"
+            android:inputType="text"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+        <EditText
+            android:id="@+id/edit_patient_details_nric"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_contacts_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_contacts_24dp_color_primary"
+            android:hint="@string/nric"
+            android:inputType="text"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+        <EditText
+            android:id="@+id/edit_patient_details_relationship"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_group_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_group_24dp_color_primary"
+            android:hint="@string/relationship"
+            android:inputType="text"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_patient_details_dob"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_cake_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_cake_24dp_color_primary"
+                android:hint="@string/date_of_birth"
+                android:inputType="date"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+            <EditText
+                android:id="@+id/edit_patient_details_gender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_gender_male_female_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_gender_male_female_24dp_color_primary"
+                android:hint="@string/gender"
+                android:inputType="text"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edit_patient_details_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_home_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_home_24dp_color_primary"
+            android:hint="@string/address"
+            android:inputType="textPostalAddress"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_empty_patients_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/no_patient_found"/>
+    </LinearLayout>
+
+</FrameLayout>

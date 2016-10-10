@@ -1,0 +1,104 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_app_details_patient_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_accessibility_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_accessibility_24dp_color_primary"
+                android:hint="@string/patient_name"
+                android:inputType="text"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_app_details_patient_nric"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_contacts_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_contacts_24dp_color_primary"
+                android:hint="@string/nric"
+                android:inputType="text"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_app_details_patient_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/input_field_vertical_margin"
+                android:drawableLeft="@drawable/ic_home_24dp_color_primary"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:drawableStart="@drawable/ic_home_24dp_color_primary"
+                android:hint="@string/address"
+                android:inputType="text"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:paddingBottom="@dimen/text_field_title_vertical_padding"
+            android:paddingEnd="@dimen/text_field_title_horizontal_padding"
+            android:paddingLeft="@dimen/text_field_title_horizontal_padding"
+            android:paddingRight="@dimen/text_field_title_horizontal_padding"
+            android:paddingStart="@dimen/text_field_title_horizontal_padding"
+            android:text="Patient's Condition for Appointment"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/text_size_list_item_normal" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_app_details_patient_mobility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+                android:hint="Description"
+                android:inputType="text"
+                android:paddingBottom="@dimen/input_field_vertical_padding"
+                android:paddingLeft="@dimen/input_field_horizontal_padding"
+                android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+</ScrollView>
