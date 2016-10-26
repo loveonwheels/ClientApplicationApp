@@ -122,9 +122,12 @@ public class PatientConditionDialog extends DialogFragment implements View.OnCli
             case R.id.btn_patient_condition_confirm:
                 if(checkEntries() == -1) {
                     condition_ids[0] = edit_mobility.getText().toString();
-                  /*  getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK,
+
+                  /*
+                     getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK,
                             getActivity().getIntent().putExtra(PATIENT_CONDITIONS, condition_ids)
-                                    .putExtra(Constants.EXTRA_FINAL_RATE, rate));*/
+                                    .putExtra(Constants.EXTRA_FINAL_RATE, rate));
+                  */
 
                     getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK,
                             getActivity().getIntent().putExtra(PATIENT_CONDITIONS, condition_ids)

@@ -4,6 +4,8 @@ package com.mSIHAT.client.utils;
  * Created by alamchristian on 3/2/16.
  */
 public class Constants {
+
+  public static final String SHARED_DB = "sharedDBmSIHAT";
     public static final String API_URL = "http://healthcarepro.azurewebsites.net/alamazure/";
   //  public static final String API_URL = "http://192.168.0.1:16114/alamazure/";
     public static final String PAYPAL_CLIENT_ID = "ARbRdSlh38xDR_eQz556iS5_S3NEIMUOChHm4cugHOWqLtc8xgetcZBTFdIF6xdudC__vNWZK-rTxG2p";

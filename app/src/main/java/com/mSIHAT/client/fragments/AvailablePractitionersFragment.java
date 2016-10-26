@@ -160,6 +160,8 @@ Log.e("here1","here1");
 
     private void findViewById(View view) {
         practitioners_list = (ListView) view.findViewById(R.id.list_available_practitioners);
+
+
         practitioners_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -709,7 +711,7 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
 
 
         Call<List<Practitioner>> call = restPracService.getService().getAvailablePractitioners(subservice_id,
-                city_id, DateReq,timeReq);
+                city_id, DateReq,timeReq,0,0);
         Log.e("here144","here144");
 
         call.enqueue(new Callback<List<Practitioner>>() {

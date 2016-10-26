@@ -1,8 +1,14 @@
 package com.mSIHAT.client;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -23,15 +29,32 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.mSIHAT.client.APIServices.PractitionerService;
+import com.mSIHAT.client.APIServices.RestAppointmentService;
+import com.mSIHAT.client.APIServices.RestPractitionerService;
 import com.mSIHAT.client.fragments.MyAccountFragment;
 
 import com.mSIHAT.client.fragments.AppointmentsFragment;
 
 import com.mSIHAT.client.fragments.MyPatientsFragment;
+import com.mSIHAT.client.fragments.NewAppointmentFragment;
 import com.mSIHAT.client.fragments.ServicesFragment;
+import com.mSIHAT.client.fragments.dialogs.SelectPract;
 import com.mSIHAT.client.fragments.pagerAdapters.AppointmentsFragmentPagerAdapter;
+import com.mSIHAT.client.models.Appointment;
+import com.mSIHAT.client.models.Practitioner;
+import com.mSIHAT.client.models.Service;
 import com.mSIHAT.client.utils.Constants;
+
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,
@@ -44,7 +67,7 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private Bundle main_bundle;
     private TextView nav_head_text_fullname, nav_head_text_email;
-
+    private RestPractitionerService practService;
     private FragmentTransaction fragTransaction = null;
 
     private boolean refresh_fragment;
@@ -59,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
         Intent callingIntent = getIntent();
         main_bundle = callingIntent.getExtras();
-
+        practService = new RestPractitionerService();
         main_bundle = callingIntent.getExtras();
         if (main_bundle != null) {
             nav_head_text_fullname.setText(main_bundle.getString(Constants.EXTRA_USER_FULLNAME));
@@ -69,7 +92,51 @@ public class MainActivity extends AppCompatActivity
             Log.d("MainActivity", "Bundle is null");
         }
         fragTransaction = getSupportFragmentManager().beginTransaction();
-        setupAppointmentsPagerAdapter(Constants.APPOINTMENT_STATUS_CONFIRMED);
+      //  setupAppointmentsPagerAdapter(Constants.APPOINTMENT_STATUS_CONFIRMED);
+
+        fragTransaction.replace(R.id.container_frag_main,NewAppointmentFragment.newInstance(user_id),
+                "newappointmentfrag").commit();
+
+        String tkn = FirebaseInstanceId.getInstance().getToken();
+        Log.d("Token oh24","Token ["+tkn+"]");
+
+
+        SharedPreferences prefs = getSharedPreferences(Constants.SHARED_DB, MODE_PRIVATE);
+        int restoredUser = prefs.getInt("userid", 0);
+
+        if(restoredUser == 0){
+            Log.e("restoused ","empty");
+            SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_DB, MODE_PRIVATE).edit();
+            editor.putInt("userid", user_id);
+            editor.commit();
+        }
+
+        if(tkn != null){
+            String restoredText = prefs.getString("fireToken", null);
+            if (restoredText != null) {
+                if(tkn != restoredText){
+                    SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_DB, MODE_PRIVATE).edit();
+                    editor.putInt("userid", user_id);
+                    editor.putString("fireToken", tkn);
+                    editor.commit();
+                    updatetoken(user_id,tkn);
+
+                }
+
+            }else{
+                SharedPreferences.Editor editor = getSharedPreferences(Constants.SHARED_DB, MODE_PRIVATE).edit();
+                editor.putInt("userid", user_id);
+                editor.putString("fireToken", tkn);
+                editor.commit();
+                updatetoken(user_id,tkn);
+            }
+
+
+        }
+
+
+
+
     }
 
     private void findViewById(){
@@ -141,7 +208,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        if(refresh_fragment){
+      /*  if(refresh_fragment){
             refresh_fragment = false;
             Fragment frag = this.getSupportFragmentManager().findFragmentByTag(Constants.MAIN_FRAGMENT_TAG);
             if(frag != null){
@@ -152,6 +219,8 @@ public class MainActivity extends AppCompatActivity
                 setTabTitles();
             }
         }
+
+        */
     }
 
     @Override
@@ -185,12 +254,21 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_appointments:
-                setTitle(R.string.title_activity_main);
-                setupAppointmentsPagerAdapter(Constants.APPOINTMENT_STATUS_CONFIRMED);
+                setTitle("mSIHAT");
+               // setupAppointmentsPagerAdapter(Constants.APPOINTMENT_STATUS_PENDING);
+
+                NewAppointmentFragment f = (NewAppointmentFragment)getSupportFragmentManager().findFragmentByTag("newappointmentfrag");
+                if(f == null){
+                    Log.e("found ur frag","found the frag");
+                    fragTransaction.replace(R.id.container_frag_main, NewAppointmentFragment.newInstance(user_id),
+                            "newappointmentfrag").commit();
+
+                }
+
                 break;
             case R.id.nav_pending_appointments:
-                setTitle(R.string.pending_appointments);
-                setupAppointmentsPagerAdapter(Constants.APPOINTMENT_STATUS_PENDING);
+                setTitle("Appointments");
+                setupAppointmentsPagerAdapter(Constants.APPOINTMENT_STATUS_CONFIRMED);
                 break;
             case R.id.nav_completed_appointments:
                 setTitle(R.string.completed_appointments);
@@ -242,9 +320,32 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK){
+      /*  if(resultCode == Activity.RESULT_OK){
+
+
             refresh_fragment = true;
         }
+
+        */
+
+        Log.e("paypal got here in m","here");
+        Log.e("paypal got here",String.valueOf(requestCode));
+        Log.e("paypal got here",String.valueOf(resultCode));
+
+
+          if(resultCode == Activity.RESULT_OK){
+              Log.e("paypal got here","here");
+              Fragment fragment = getSupportFragmentManager().findFragmentByTag("singleTimeDialog");
+              fragment.onActivityResult(SelectPract.PAYMENT_REQUEST_CODE, resultCode, data);
+
+          } else if (resultCode == Activity.RESULT_CANCELED){
+              if(requestCode == NewAppointmentFragment.ACTIVITY_RESULT_NEWAPP) {
+              }
+          }
+
+
+
+
     }
 
     @Override
@@ -257,4 +358,52 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(detailIntent, ACTIVITY_RESULT_CONTENT_CHANGED);
 
     }
-}
+
+    public int getuserid(){
+        return user_id;
+    }
+
+
+
+    public static class MyReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context arg0, Intent arg1) {
+            // TODO Auto-generated method stub
+
+          Log.e("confiremed","sdsd");
+
+        }
+    }
+
+
+
+
+    public void updatetoken(int userid,String token){
+
+        Log.e(String.valueOf(userid),String.valueOf(token));
+        Call<Boolean> practSer = practService.getService().Updatetoken(userid,token);
+        practSer.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.code() == 201){
+
+
+
+                }
+                else {
+
+                    Log.e("completed token2","completed");
+                }
+                Log.e("response",String.valueOf(response.code()));
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    }

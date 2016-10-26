@@ -1,6 +1,7 @@
 package com.mSIHAT.client.fragments;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,19 +17,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.mSIHAT.client.APIServices.RestForServices;
 import com.mSIHAT.client.APIServices.RestPatientService;
 import com.mSIHAT.client.AvailablePractitionersActivity;
+import com.mSIHAT.client.MainActivity;
 import com.mSIHAT.client.R;
+import com.mSIHAT.client.fragments.dialogs.SelectPract;
 import com.mSIHAT.client.fragments.dialogs.selectors.PatientSelectionDialog;
 import com.mSIHAT.client.fragments.dialogs.selectors.ServiceSelectionDialog;
 import com.mSIHAT.client.fragments.dialogs.SingleAppointmentTimeDialog;
 import com.mSIHAT.client.fragments.dialogs.selectors.SubserviceSelectionDialog;
+import com.mSIHAT.client.map.MapFragment;
 import com.mSIHAT.client.models.Service;
 import com.mSIHAT.client.models.Subservice;
 import com.mSIHAT.client.models.views.PatientSelectionItem;
 import com.mSIHAT.client.utils.Constants;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -74,6 +80,8 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
         Bundle args = new Bundle();
         args.putInt(ARG_USER_ID, user_id);
         fragment.setArguments(args);
+
+
         return fragment;
     }
 
@@ -81,9 +89,9 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            Log.e("dfgdg","its not empty");
             user_id = getArguments().getInt(ARG_USER_ID);
-            servicesRest = new RestForServices();
-            patientRest = new RestPatientService();
+
         }
     }
 
@@ -97,12 +105,24 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_new_appointment, container, false);
-        getActivity().setTitle(getString(R.string.new_appointment));
+
+        servicesRest = new RestForServices();
+        patientRest = new RestPatientService();
+        getActivity().setTitle("mSIHAT");
         findViewById(rootView);
         retrievePatients();
         retrieveServices();
-
+       // getFirebaseKey();
         return rootView;
+    }
+
+
+    public void getFirebaseKey(){
+        String tkn = FirebaseInstanceId.getInstance().getToken();
+        Toast.makeText(getActivity(), "Current token ["+tkn+"]",
+                Toast.LENGTH_LONG).show();
+        Log.d("App Token", "Token ["+tkn+"]");
+
     }
 
     private void findViewById(View view) {
@@ -135,7 +155,7 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
                 } else if(response.code() == 404){
                     Toast.makeText(NewAppointmentFragment.this.getContext(),
                             R.string.please_register_at_least_one_patient_under_your_account, Toast.LENGTH_SHORT).show();
-                    NewAppointmentFragment.this.getActivity().finish();
+                //    NewAppointmentFragment.this.getActivity().finish();
                     progressDialog.dismiss();
                 }
             }
@@ -210,9 +230,15 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.btn_newapp_single:
                 if(checkEntries() == -1) {
-                    SingleAppointmentTimeDialog singleDialog = SingleAppointmentTimeDialog.newInstance();
+
+
+                    SelectPract singleDialog =  SelectPract.newInstance(patient_id,subservice_id);
                     singleDialog.setTargetFragment(NewAppointmentFragment.this, SINGLE_TIME_DIALOG);
                     singleDialog.show(callingActivity.getSupportFragmentManager(), "singleTimeDialog");
+
+
+
+
                 } else {
                     Toast.makeText(NewAppointmentFragment.this.getContext(),
                             R.string.please_check_your_inputs, Toast.LENGTH_SHORT).show();
@@ -239,7 +265,12 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("amin new appointment","sdsd");
+
+        Log.e("paypal got here",String.valueOf(requestCode));
+        Log.e("paypal got here",String.valueOf(resultCode));
         switch (requestCode) {
+
             case PATIENT_DIALOG:
                 if (resultCode == Activity.RESULT_OK) {
                     patient_id = patients.get(data.getIntExtra(PatientSelectionDialog.SELECTED_PATIENT_ID, 0)).patient_id;
@@ -320,5 +351,17 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
             }
         }
         return errorAt;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        MapFragment f = (MapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+        if (f != null){
+          Log.e("found a map","found");
+            getActivity().getSupportFragmentManager().beginTransaction().remove(f).commit();
+
+        }
+
     }
 }

@@ -62,7 +62,7 @@ public class AvailablePractitionersAvailListAdapter extends BaseAdapter {
 
 
         text_name.setText(this.practitioners.get(position).name);
-        text_nric.setText(this.practitioners.get(position).level);
+        text_nric.setText(this.practitioners.get(position).gender+" | "+this.practitioners.get(position).level+" | "+this.practitioners.get(position).language);
         text_gender.setText(this.practitioners.get(position).gender);
         text_language.setText(this.practitioners.get(position).language);
 

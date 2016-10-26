@@ -25,12 +25,20 @@ public class AvailablePractitionersListAdapter extends BaseAdapter {
     List<Practitioner> practitioners = null;
     Context context;
     private static LayoutInflater inflater = null;
+    int type = 0;
 
     public AvailablePractitionersListAdapter(Context context, List<Practitioner> practitioners){
         this.context = context;
         this.practitioners = practitioners;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
+    public AvailablePractitionersListAdapter(Context context, List<Practitioner> practitioners,int type){
+        this.context = context;
+        this.practitioners = practitioners;
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
 
     @Override
     public int getCount() {
@@ -62,11 +70,19 @@ public class AvailablePractitionersListAdapter extends BaseAdapter {
 
 
         text_name.setText(this.practitioners.get(position).name);
-        text_nric.setText(this.practitioners.get(position).level);
-        text_gender.setText(this.practitioners.get(position).gender);
+
+        String CurrentString = this.practitioners.get(position).language;
+        Log.e("language",this.practitioners.get(position).language);
+        String[] separated = CurrentString.split("#");
+         // this will contain "Fruit"
+
+
+
+        text_nric.setText(this.practitioners.get(position).gender+" | >"+this.practitioners.get(position).level+" | "+separated[0]);
+        text_gender.setText("Certified "+separated[1]);
         text_language.setText(this.practitioners.get(position).language);
 
-        Log.e("language",this.practitioners.get(position).language);
+        Log.e("language",this.practitioners.get(position).phonenumber);
         text_expertise.setText(String.valueOf(this.practitioners.get(position).rating));
 
         Picasso.with(context)

@@ -17,4 +17,28 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+
+    <string-array name="Search_array_male">
+        <item >All</item>
+        <item >Male</item>
+        <item >Female</item>
+    </string-array>
+
+
+    <string-array name="Search_array_amt">
+        <item >Once</item>
+        <item >For 2 weeks</item>
+        <item >For 3 weeks</item>
+        <item >For 4 weeks</item>
+        <item >For 5 weeks</item>
+        <item >For 6 weeks</item>
+        <item >For 7 weeks</item>
+        <item >For 8 weeks</item>
+        <item >For 9 weeks</item>
+        <item >For 10 weeks</item>
+        <item >For 11 weeks</item>
+        <item >For 12 weeks</item>
+    </string-array>
+
+
 </resources>

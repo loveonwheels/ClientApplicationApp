@@ -3,59 +3,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.NewAppointmentFragment">
+    <fragment
+        android:id="@+id/map"
+        class="com.mSIHAT.client.map.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp">
 
-        <EditText
-            android:id="@+id/edit_newapp_patient_name"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:layout_width="3dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="3dp"
+                            android:background="@color/colorPrimary"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="5dp" />
+
+                        <RelativeLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:background="@color/colorPrimary"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="5dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edit_newapp_patient_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Who needs the service ?."
+                        android:inputType="text"
+                        android:focusableInTouchMode="false"
+                        android:paddingBottom="@dimen/input_field_vertical_padding"
+                        android:paddingLeft="@dimen/input_field_horizontal_padding"
+                        android:paddingStart="@dimen/input_field_horizontal_padding"
+                        android:textSize="15dp"
+                        android:textIsSelectable="true"
+                        android:paddingTop="@dimen/input_field_vertical_padding" />
+
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1" >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <RelativeLayout
+                            android:layout_width="3dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="3dp"
+                            android:background="@color/colorPrimary"
+                            android:layout_marginBottom="10dp" />
+
+                        <RelativeLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:background="@color/colorPrimary"
+                            android:layout_marginBottom="10dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edit_newapp_service_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Which service ?."
+                        android:inputType="text"
+                        android:focusableInTouchMode="false"
+                        android:paddingBottom="@dimen/input_field_vertical_padding"
+                        android:paddingLeft="@dimen/input_field_horizontal_padding"
+                        android:paddingStart="@dimen/input_field_horizontal_padding"
+                        android:textIsSelectable="true"
+                        android:textSize="15dp" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1" >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <RelativeLayout
+                            android:layout_width="3dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="3dp"
+                            android:background="@color/colorPrimary"
+                            android:layout_marginBottom="10dp" />
+
+                        <RelativeLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:background="@color/colorPrimary"
+                            android:layout_marginBottom="10dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edit_newapp_subservice_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Specific the service ?."
+                        android:inputType="text"
+                        android:focusableInTouchMode="false"
+                        android:paddingBottom="@dimen/input_field_vertical_padding"
+                        android:paddingLeft="@dimen/input_field_horizontal_padding"
+                        android:paddingStart="@dimen/input_field_horizontal_padding"
+                        android:textSize="15dp"
+                        android:textIsSelectable="true" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_newapp_single"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_account_circle_24dp_color_primary"
-            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
-            android:drawableStart="@drawable/ic_account_circle_24dp_color_primary"
-            android:hint="Patient's Name"
-            android:inputType="text"
-            android:focusableInTouchMode="false"
-            android:paddingBottom="@dimen/input_field_vertical_padding"
-            android:paddingLeft="@dimen/input_field_horizontal_padding"
-            android:paddingStart="@dimen/input_field_horizontal_padding" />
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="Next"
+            android:textColor="#fff"
+            android:layout_gravity="top"
+            android:layout_marginTop="5dp" />
 
-        <EditText
-            android:id="@+id/edit_newapp_service_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/input_field_vertical_margin"
-            android:drawableLeft="@drawable/ic_assignment_24dp_color_primary"
-            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
-            android:drawableStart="@drawable/ic_assignment_24dp_color_primary"
-            android:hint="Service Type"
-            android:inputType="text"
-            android:focusableInTouchMode="false"
-            android:paddingBottom="@dimen/input_field_vertical_padding"
-            android:paddingLeft="@dimen/input_field_horizontal_padding"
-            android:paddingStart="@dimen/input_field_horizontal_padding" />
-
-        <EditText
-            android:id="@+id/edit_newapp_subservice_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/input_field_vertical_margin"
-            android:drawableLeft="@drawable/ic_assignment_24dp_color_primary"
-            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
-            android:drawableStart="@drawable/ic_assignment_24dp_color_primary"
-            android:hint="Subservice Type"
-            android:inputType="text"
-            android:focusableInTouchMode="false"
-            android:paddingBottom="@dimen/input_field_vertical_padding"
-            android:paddingLeft="@dimen/input_field_horizontal_padding"
-            android:paddingStart="@dimen/input_field_horizontal_padding" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +196,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btn_newapp_multiple"
@@ -75,15 +209,56 @@
             android:text="@string/multiple_appointments"
             android:textColor="#fff" />
 
-        <Button
-            android:id="@+id/btn_newapp_single"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/button_action_height"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:text="@string/single_appointment"
-            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttons_layout"
+        android:layout_margin="10dp"
+        android:background="#ffffff">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1"
+            android:paddingRight="10dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <RelativeLayout
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="3dp"
+                        android:background="@drawable/ic_notifications_black_24dp"
+                        android:layout_gravity="left|center" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="Paul Lee has physiotheraphy by 8:00 am Today"
+                    android:id="@+id/textView3"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textIsSelectable="true" />
+
+            </TableRow>
+        </TableLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "806967751501",
+    "firebase_url": "https://msihat-9532c.firebaseio.com",
+    "project_id": "msihat-9532c",
+    "storage_bucket": "msihat-9532c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806967751501:android:4778133c3c6f94b1",
+        "android_client_info": {
+          "package_name": "com.mSIHAT.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806967751501-cv4grn8ftf2db9kbt1kjho5d1qf5nka5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCJVartnsZb3N_p5GtzlPXGJKUzcKK1vM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

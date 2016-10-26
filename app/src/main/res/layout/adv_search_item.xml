@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="10dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saturday, 5 June 2016"
+            android:id="@+id/textView15"
+            android:textColor="#585656" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/linearLayout6" >
+
+            <RelativeLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff" >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary" >
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TableLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:stretchColumns="*"
+                                android:id="@+id/tableLayout3"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingTop="10dp" >
+
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" >
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/material_deep_teal_500"
+                                        android:id="@+id/linearLayout9"
+                                        android:paddingBottom="30dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Mon"
+                                            android:id="@+id/textView19"
+                                            android:textColor="#ffffff"
+                                            android:textAlignment="center"
+                                            android:textStyle="bold|italic" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/colorPrimary"
+                                        android:id="@+id/linearLayout10"
+                                        android:paddingBottom="30dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Tue"
+                                            android:id="@+id/textView20"
+                                            android:textColor="#d7cece"
+                                            android:textAlignment="center"
+                                            android:textStyle="italic" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/colorPrimary"
+                                        android:id="@+id/linearLayout11"
+                                        android:paddingBottom="30dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Wed"
+                                            android:id="@+id/textView21"
+                                            android:textColor="#d7cece"
+                                            android:textAlignment="center"
+                                            android:textStyle="italic" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/linearLayout12"
+                                        android:paddingBottom="30dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Thu"
+                                            android:id="@+id/textView22"
+                                            android:textColor="#d7cece"
+                                            android:textAlignment="center"
+                                            android:textStyle="italic" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="#5ec4c1c1"
+                                        android:id="@+id/linearLayout13"
+                                        android:paddingBottom="30dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Fri"
+                                            android:id="@+id/textView23"
+                                            android:textColor="#d7cece"
+                                            android:textAlignment="center"
+                                            android:textStyle="italic" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/colorPrimary"
+                                        android:id="@+id/linearLayout14"
+                                        android:paddingBottom="30dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Sat"
+                                            android:id="@+id/textView24"
+                                            android:textColor="#d7cece"
+                                            android:textAlignment="center"
+                                            android:textStyle="italic" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/colorPrimary"
+                                        android:id="@+id/linearLayout15"
+                                        android:paddingBottom="30dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Sun"
+                                            android:id="@+id/textView25"
+                                            android:textColor="#d7cece"
+                                            android:textAlignment="center"
+                                            android:textStyle="italic" />
+                                    </LinearLayout>
+                                </TableRow>
+
+                            </TableLayout>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Do you want a pratitioner for this day ? "
+                        android:id="@+id/switch1"
+                        android:layout_gravity="left"
+                        android:padding="10dp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/input_layout_searchstarttime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/input_searcg_starttime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:textColor="@drawable/edit_text_selector"
+                                android:hint="Start TIme" />
+                        </android.support.design.widget.TextInputLayout>
+
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/input_layout_searchendtime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/input_search_endtime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:textColor="@drawable/edit_text_selector"
+                                android:hint="End Time" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:visibility="visible"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="5 Practitioner(s) found with pefect match"
+                                android:id="@+id/textView13"
+                                android:background="@color/accent_material_light"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:paddingTop="7dp"
+                                android:paddingBottom="7dp"
+                                android:textColor="#ffffff"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="!6 Practitioner(s) found with patial match"
+                                android:id="@+id/textView14"
+                                android:background="#cbba20"
+                                android:paddingTop="7dp"
+                                android:paddingBottom="7dp"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:layout_marginTop="5dp"
+                                android:textColor="#ffffff"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Perfect Match"
+                                android:id="@+id/textView6"
+                                android:textSize="10dp"
+                                android:drawableLeft="@drawable/ic_fiber_manual_record_green_24dp"
+                                android:layout_gravity="right"
+                                android:textStyle="italic" />
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="100dp"
+                                    app:civ_border="false"
+
+                                    android:src="@drawable/profile"
+                                    android:id="@+id/text_list_row_practitioner_image"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_gravity="center|right" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/text_list_row_practitioner_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Placeholder"
+                                        android:textColor="@color/colorTextPrimary"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_size_list_item_normal"/>
+
+                                    <TextView
+                                        android:id="@+id/text_list_row_practitioner_nric"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Placeholder"
+                                        android:textColor="@color/colorTextSecondary"
+                                        android:gravity="center_vertical"
+                                        android:textSize="12dp" />
+
+                                    <TextView
+                                        android:id="@+id/text_list_row_practitioner_gender"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Male"
+                                        android:drawableLeft="@drawable/ic_class_black_24dp"
+                                        android:textColor="@color/colorTextSecondary"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_size_list_item_secondary"
+                                        android:textStyle="italic" />
+
+                                    <TextView
+                                        android:id="@+id/text_list_row_practitioner_language"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Language : English, Malay"
+                                        android:textColor="@color/colorTextSecondary"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_size_list_item_secondary"
+                                        android:visibility="gone" />
+
+                                    <TextView
+                                        android:id="@+id/text_list_row_practitioner_expertise"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Placeholder"
+                                        android:textColor="@color/colorTextSecondary"
+                                        android:gravity="center_vertical"
+                                        android:textSize="@dimen/text_size_list_item_secondary"
+                                        android:visibility="gone" />
+
+                                    <RatingBar
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/ratingBar"
+                                        style="?android:attr/ratingBarStyleSmall"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <Button
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Select Practitioner"
+                                android:id="@+id/button11"
+                                android:layout_gravity="right"
+                                android:background="@color/colorPrimaryLight"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:textColor="#ffffff" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saturday, 5 June 2016"
+            android:id="@+id/textView26"
+            android:textColor="#585656" />
+
+        <RelativeLayout
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+</LinearLayout>

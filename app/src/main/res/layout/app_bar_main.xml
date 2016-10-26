@@ -38,6 +38,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_note_add_24dp_color_text_icon"
-        android:background="@drawable/side_nav_bar" />
+        android:background="@drawable/side_nav_bar"
+        android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>

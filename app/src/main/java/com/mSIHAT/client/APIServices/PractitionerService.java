@@ -2,6 +2,7 @@ package com.mSIHAT.client.APIServices;
 
 import com.mSIHAT.client.models.Practitioner;
 import com.mSIHAT.client.models.PractitionerAvail;
+import com.mSIHAT.client.models.PractitionerPartial;
 import com.mSIHAT.client.models.ServiceRate;
 
 import java.util.List;
@@ -40,8 +41,25 @@ public interface PractitionerService {
     Call<List<Practitioner>> getAvailablePractitioners(@Query("subservice_id") int subservice_id,
                                                        @Query("city_id") int city_id,
                                                        @Query("search_date") String dateReq,
-                                                       @Query("search_time") int timeReq
+                                                       @Query("search_time") int timeReq,
+                                                       @Query("search_gender") int gender,
+                                                       @Query("search_frq") int frq
                                                        );
+
+    @PUT("Partialmatch/GetPractitioners")
+    Call<List<PractitionerPartial>> getPartialAvailPractitioners(@Query("subservice_id") int subservice_id,
+                                                                 @Query("city_id") int city_id,
+                                                                 @Query("search_date") String dateReq,
+                                                                 @Query("search_time") int timeReq,
+                                                                 @Query("search_gender") int gender,
+                                                                 @Query("search_frq") int frq
+    );
+
+
+    @POST("Notification/UpdateToken")
+    Call<Boolean> Updatetoken(@Query("userid") int userid,
+                                                                 @Query("token") String token
+    );
 
 
 }
