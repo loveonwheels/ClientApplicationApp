@@ -66,7 +66,6 @@ public class AppointmentDetailsActivity extends AppCompatActivity implements Fra
 
         appointment_id = (int) getIntent().getExtras().getLong(Constants.EXTRA_APPOINTMENT_ID);
         isMulti = getIntent().getExtras().getBoolean(Constants.EXTRA_IS_MULTI_APPOINTMENT);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(getString(R.string.title_activity_appointment_details));
@@ -128,7 +127,7 @@ Log.e("appiontment id",String.valueOf(appointment_id));
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(appo -> {
                     Log.e("AppDetails", "open appointment = " + String.valueOf(appointment_id));
-                   viewPager.setAdapter(new AppointmentDetailFragmentsPagerAdapter(getSupportFragmentManager(), this, bundle));
+                   viewPager.setAdapter(new AppointmentDetailFragmentsPagerAdapter(getSupportFragmentManager(), this, bundle,appointment_id));
                     Log.e("here","gere");
                     tabLayout.setupWithViewPager(viewPager);
                     Log.e("here","gere2");
@@ -165,6 +164,9 @@ Log.e("appiontment id",String.valueOf(appointment_id));
         bundle.putParcelable(Constants.PARCEL_APPOINTMENT_DETAILS, details);
         bundle.putParcelable(Constants.PARCEL_APPOINTMENT_DETAILS_PATIENT, patientApp);
         bundle.putParcelable(Constants.PARCEL_APPOINTMENT_DETAILS_PRACTITIONER, practitioner);
+        bundle.putInt(Constants.EXTRA_PATIENT_ID, patient.patient_id);
+        bundle.putInt(Constants.EXTRA_APPOINTMENT_STATUS, app.status);
+
 
         return app;
     }

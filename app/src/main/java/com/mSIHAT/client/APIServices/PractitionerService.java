@@ -46,6 +46,16 @@ public interface PractitionerService {
                                                        @Query("search_frq") int frq
                                                        );
 
+    @PUT("FavoriteSearch/GetPractitioners")
+    Call<List<Practitioner>> getFavAvailablePractitioners(@Query("subservice_id") int subservice_id,
+                                                       @Query("city_id") int city_id,
+                                                       @Query("search_date") String dateReq,
+                                                       @Query("search_time") int timeReq,
+                                                       @Query("search_gender") int gender,
+                                                       @Query("search_frq") int frq,
+                                                          @Query("user_id") int user_id
+    );
+
     @PUT("Partialmatch/GetPractitioners")
     Call<List<PractitionerPartial>> getPartialAvailPractitioners(@Query("subservice_id") int subservice_id,
                                                                  @Query("city_id") int city_id,
@@ -59,6 +69,19 @@ public interface PractitionerService {
     @POST("Notification/UpdateToken")
     Call<Boolean> Updatetoken(@Query("userid") int userid,
                                                                  @Query("token") String token
+    );
+
+
+    @POST("Favourite/MakeFavorite")
+    Call<Boolean> makefavorite(@Query("practitionerid") int practitionerid,@Query("appointmentid") int appointmentid
+    );
+
+    @PUT("Favourite/GetPractitioners")
+    Call<List<Practitioner>> getmyfavourite(@Query("user_id") int userid
+    );
+
+    @DELETE("Favourite/DeleteFavorite")
+    Call<String> deletefavourite(@Query("practitioner_id") int practitioner_id,@Query("user_id") int userid
     );
 
 

@@ -138,7 +138,7 @@
                     android:drawableLeft="@drawable/ic_lock_24dp_color_primary"
                     android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
                     android:drawableStart="@drawable/ic_lock_24dp_color_primary"
-                    android:hint="Password"
+                    android:hint="Confirm Password"
                     android:inputType="textPassword"
                     android:paddingLeft="@dimen/input_field_horizontal_padding" />
     </android.support.design.widget.TextInputLayout>

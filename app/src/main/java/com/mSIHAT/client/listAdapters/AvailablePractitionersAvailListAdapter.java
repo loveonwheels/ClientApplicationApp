@@ -60,14 +60,22 @@ public class AvailablePractitionersAvailListAdapter extends BaseAdapter {
         TextView text_language = (TextView) view.findViewById(R.id.text_list_row_practitioner_language);
         CircularImageView searchView = (CircularImageView ) view.findViewById(R.id.text_list_row_practitioner_image);
 
-
         text_name.setText(this.practitioners.get(position).name);
-        text_nric.setText(this.practitioners.get(position).gender+" | "+this.practitioners.get(position).level+" | "+this.practitioners.get(position).language);
-        text_gender.setText(this.practitioners.get(position).gender);
+
+        String CurrentString = this.practitioners.get(position).language;
+        Log.e("language",this.practitioners.get(position).language);
+        String[] separated = CurrentString.split("#");
+        // this will contain "Fruit"
+
+
+
+        text_nric.setText(this.practitioners.get(position).gender+" | "+separated[0]);
+        text_gender.setText("Certified "+separated[1]);
         text_language.setText(this.practitioners.get(position).language);
 
-        Log.e("language",this.practitioners.get(position).language);
         text_expertise.setText(String.valueOf(this.practitioners.get(position).rating));
+
+
 
         Picasso.with(context)
                 .load(this.practitioners.get(position).imageurl)

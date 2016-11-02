@@ -37,7 +37,7 @@ public class AppointmentDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static AppointmentDetailsFragment newInstance(AppointmentDetails app_parcel) {
+    public static AppointmentDetailsFragment newInstance(AppointmentDetails app_parcel,int status) {
         AppointmentDetailsFragment fragment = new AppointmentDetailsFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_PARCEL_APPOINTMENT, app_parcel);
@@ -128,10 +128,12 @@ btnConfirm.setVisibility(View.INVISIBLE);
             case 2:
                 text_status.setGravity(Gravity.CENTER_HORIZONTAL);
                 text_status.setText(R.string.confirmed);
+
                 break;
-            case 3:
+            case 4:
                 text_status.setGravity(Gravity.END);
                 text_status.setText(R.string.completed);
+                btnConfirm.setVisibility(View.INVISIBLE);
                 break;
             default:
                 break;

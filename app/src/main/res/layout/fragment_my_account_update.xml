@@ -65,7 +65,8 @@
             android:inputType="numberDecimal"
             android:paddingBottom="@dimen/input_field_vertical_padding"
             android:paddingLeft="@dimen/input_field_horizontal_padding"
-            android:paddingStart="@dimen/input_field_horizontal_padding" />
+            android:paddingStart="@dimen/input_field_horizontal_padding"
+            android:visibility="gone" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -89,6 +90,26 @@
 
     </android.support.design.widget.TextInputLayout>
 
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_account_update_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/input_field_vertical_margin"
+            android:drawableLeft="@drawable/ic_call_24dp_color_primary"
+            android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
+            android:drawableStart="@drawable/ic_call_24dp_color_primary"
+            android:hint="Change Password"
+            android:paddingBottom="@dimen/input_field_vertical_padding"
+            android:paddingLeft="@dimen/input_field_horizontal_padding"
+            android:paddingStart="@dimen/input_field_horizontal_padding" />
+
+    </android.support.design.widget.TextInputLayout>
+
     <LinearLayout
         android:layout_marginTop="@dimen/input_field_vertical_margin"
         android:layout_width="match_parent"
@@ -103,14 +124,16 @@
             android:textColor="@color/colorTextIcon"
             android:background="@color/colorAccent"
             android:layout_marginEnd="@dimen/input_field_horizontal_padding"
-            android:layout_marginRight="@dimen/input_field_horizontal_padding"/>
+            android:layout_marginRight="@dimen/input_field_horizontal_padding"
+            android:visibility="gone" />
         <Button
             android:id="@+id/button_account_update_change_creditcard"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:text="@string/change_card"
             android:textColor="@color/colorTextIcon"
-            android:background="@color/colorAccent"/>
+            android:background="@color/colorAccent"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Saturday, 5 June 2016"
-            android:id="@+id/textView15"
+            android:id="@+id/date_start"
             android:textColor="#585656" />
 
         <LinearLayout
@@ -400,7 +400,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Saturday, 5 June 2016"
-            android:id="@+id/textView26"
+            android:id="@+id/date_end"
             android:textColor="#585656" />
 
         <RelativeLayout

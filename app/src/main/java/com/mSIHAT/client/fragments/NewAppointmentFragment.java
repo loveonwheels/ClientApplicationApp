@@ -108,7 +108,7 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
 
         servicesRest = new RestForServices();
         patientRest = new RestPatientService();
-        getActivity().setTitle("mSIHAT");
+       // getActivity().setTitle("mSIHAT");
         findViewById(rootView);
         retrievePatients();
         retrieveServices();
@@ -232,7 +232,7 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
                 if(checkEntries() == -1) {
 
 
-                    SelectPract singleDialog =  SelectPract.newInstance(patient_id,subservice_id);
+                    SelectPract singleDialog =  SelectPract.newInstance(patient_id,subservice_id,user_id);
                     singleDialog.setTargetFragment(NewAppointmentFragment.this, SINGLE_TIME_DIALOG);
                     singleDialog.show(callingActivity.getSupportFragmentManager(), "singleTimeDialog");
 

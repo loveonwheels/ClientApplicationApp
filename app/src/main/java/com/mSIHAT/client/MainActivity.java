@@ -39,6 +39,7 @@ import com.mSIHAT.client.fragments.MyAccountFragment;
 
 import com.mSIHAT.client.fragments.AppointmentsFragment;
 
+import com.mSIHAT.client.fragments.MyFavourite;
 import com.mSIHAT.client.fragments.MyPatientsFragment;
 import com.mSIHAT.client.fragments.NewAppointmentFragment;
 import com.mSIHAT.client.fragments.ServicesFragment;
@@ -178,6 +179,7 @@ public class MainActivity extends AppCompatActivity
             tabLayout = (TabLayout) findViewById(R.id.tablayout_appointments_main);
         }
         Bundle bundle = new Bundle();
+        Log.e("main activity userid",String.valueOf(user_id));
         bundle.putInt(Constants.EXTRA_USER_ID, user_id);
         bundle.putInt(Constants.EXTRA_APPOINTMENT_STATUS, appointment_status);
 
@@ -248,20 +250,22 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle navigation view item clicks here.x
         fragTransaction = getSupportFragmentManager().beginTransaction();
         Intent navIntent = null;
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_appointments:
                 setTitle("mSIHAT");
+                removeAppointmentsComponents();
                // setupAppointmentsPagerAdapter(Constants.APPOINTMENT_STATUS_PENDING);
 
-                NewAppointmentFragment f = (NewAppointmentFragment)getSupportFragmentManager().findFragmentByTag("newappointmentfrag");
+                NewAppointmentFragment f = (NewAppointmentFragment)getSupportFragmentManager().findFragmentByTag("Newappointment");
                 if(f == null){
                     Log.e("found ur frag","found the frag");
+                    removeAppointmentsComponents();
                     fragTransaction.replace(R.id.container_frag_main, NewAppointmentFragment.newInstance(user_id),
-                            "newappointmentfrag").commit();
+                            "Newappointment").commit();
 
                 }
 
@@ -284,6 +288,12 @@ public class MainActivity extends AppCompatActivity
                 setTitle(R.string.my_account);
                 removeAppointmentsComponents();
                 fragTransaction.replace(R.id.container_frag_main, MyAccountFragment.newInstance(user_id),
+                        Constants.MAIN_FRAGMENT_TAG).commit();
+                break;
+            case R.id.nav_my_favourite:
+                setTitle("My Favourite");
+                removeAppointmentsComponents();
+                fragTransaction.replace(R.id.container_frag_main, MyFavourite.newInstance(user_id),
                         Constants.MAIN_FRAGMENT_TAG).commit();
                 break;
             case R.id.nav_my_patients:

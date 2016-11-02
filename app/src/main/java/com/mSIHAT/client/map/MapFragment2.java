@@ -2,7 +2,7 @@ package com.mSIHAT.client.map;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
@@ -14,27 +14,32 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mSIHAT.client.R;
+import com.mSIHAT.client.fragments.PractitionerDetailsFragment;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by ghost on 11/8/16.
  */
-public class MapFragment extends com.google.android.gms.maps.SupportMapFragment implements GoogleApiClient.ConnectionCallbacks,
+public class MapFragment2 extends SupportMapFragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnMapLongClickListener,
         GoogleMap.OnMapClickListener,
+GoogleMap.OnCameraMoveListener,
         com.google.android.gms.location.LocationListener,
         OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
@@ -163,12 +168,13 @@ public class MapFragment extends com.google.android.gms.maps.SupportMapFragment 
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         mCurrentLocation = LocationServices
                 .FusedLocationApi
                 .getLastLocation(mGoogleApiClient);
 if(mCurrentLocation != null){
-    initCamera(mCurrentLocation);
-
+   initCamera(mCurrentLocation);
+    setMarker();
 }else{
 
 
@@ -185,13 +191,13 @@ if(mCurrentLocation != null){
     mLocationRequest.setFastestInterval(FATEST_INTERVAL);
     mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
-    com.google.android.gms.location.LocationRequest xx = new com.google.android.gms.location.LocationRequest();
+    LocationRequest xx = new LocationRequest();
 
     xx.setInterval(UPDATE_INTERVAL);
     xx.setFastestInterval(FATEST_INTERVAL);
     xx.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     xx.setSmallestDisplacement(DISPLACEMENT);
-    com.google.android.gms.location.LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, xx, this);
+    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, xx, this);
     /*mCurrentLocation = LocationServices
             .FusedLocationApi
             .getLastLocation(mGoogleApiClient);
@@ -213,7 +219,7 @@ if(mCurrentLocation != null){
                 .build();
 
         if (mMap == null) {
-            com.google.android.gms.maps.SupportMapFragment mapFrag = (com.google.android.gms.maps.SupportMapFragment)getFragmentManager().findFragmentById(R.id.map);
+            SupportMapFragment mapFrag = (SupportMapFragment)getFragmentManager().findFragmentById(R.id.map2);
             mapFrag.getMapAsync(this);
            // initListeners();
         }
@@ -236,8 +242,10 @@ if(mCurrentLocation != null){
                 .tilt(0.0f)
                 .build();
 
-        getMap().animateCamera(CameraUpdateFactory
+      /*  getMap().animateCamera(CameraUpdateFactory
                 .newCameraPosition(position), null);
+*/
+
 
         // mMap.setMapType(MAP_TYPES[curMapTypeIndex]);
         getMap().setTrafficEnabled(false);
@@ -257,22 +265,140 @@ if(mCurrentLocation != null){
     }
 
 
+    public void setMarker(){
+
+        Geocoder coder = new Geocoder(getContext());
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            address = coder.getFromLocationName(PractitionerDetailsFragment.patient.patient_address, 5);
+            if (address != null) {
+                Address location = address.get(0);
+                location.getLatitude();
+                location.getLongitude();
+
+
+
+                LatLng sydney = new LatLng(4.2105, 101);
+
+                // Add a marker in Sydney and move the camera
+
+                mMap.addMarker(new MarkerOptions().position(sydney)).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));;
+
+                LatLng currentlocation = new LatLng(mCurrentLocation.getLatitude(),
+                        mCurrentLocation.getLongitude());
+
+                // Add a marker in Sydney and move the camera
+
+                //mMap.addMarker(new MarkerOptions().position(currentlocation));
+
+                // create marker
+                MarkerOptions marker = new MarkerOptions().position(currentlocation);
+
+// Changing marker icon
+                 marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.hcpiconmap));
+                mMap.addMarker(marker);
+
+                //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                //  initListeners();
+
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(new LatLng(mCurrentLocation.getLatitude(),
+                        mCurrentLocation.getLongitude()));
+                builder.include(sydney);
+                LatLngBounds bounds = builder.build();
+
+
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
+                Log.e("sdfdsf","map2");
+                mMap.animateCamera(cu);
+
+                /*
+                mMap.animateCamera(cu, new GoogleMap.CancelableCallback(){
+                    public void onCancel(){}
+                    public void onFinish(){
+                        CameraUpdate zout = CameraUpdateFactory.zoomBy(-3);
+                         mMap.animateCamera(zout);
+                       // mMap.moveCamera(zout);
+                    }
+                });
+                */
+            }
+
+
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+    }
+
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMinZoomPreference(5.0f);
+        mMap.setMaxZoomPreference(14.0f);
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(4.2105, 101);
-       // mMap.addMarker(new MarkerOptions().position(sydney).icon(bit));
-        // create marker
-        MarkerOptions marker = new MarkerOptions().position(sydney).title("Hello Maps");
+        /*
+Log.e("sdfdsf","map1");
+        Geocoder coder = new Geocoder(getContext());
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            address = coder.getFromLocationName(PractitionerDetailsFragment.patient.patient_address, 5);
+            if (address != null) {
+                Address location = address.get(0);
+                location.getLatitude();
+                location.getLongitude();
+
+                LatLng sydney = new LatLng(location.getLatitude(), location.getLongitude());
+
+                // Add a marker in Sydney and move the camera
+                Log.e("sdfdsf","map3");
+                 mMap.addMarker(new MarkerOptions().position(sydney));
+                // create marker
+               // MarkerOptions marker = new MarkerOptions().position(sydney).title("Hello Maps");
 
 // Changing marker icon
-        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.hcpicon));
-        mMap.addMarker(marker);
+               // marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.hcpicon));
+               // mMap.addMarker(marker);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        initListeners();
+              //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+              //  initListeners();
+
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(new LatLng(mCurrentLocation.getLatitude(),
+                        mCurrentLocation.getLongitude()));
+                builder.include(sydney);
+                LatLngBounds bounds = builder.build();
+
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 50);
+                Log.e("sdfdsf","map2");
+                mMap.moveCamera(cu);
+                mMap.animateCamera(cu, new GoogleMap.CancelableCallback(){
+                    public void onCancel(){}
+                    public void onFinish(){
+                        CameraUpdate zout = CameraUpdateFactory.zoomBy(-3);
+                      //  mMap.animateCamera();
+                        mMap.moveCamera(zout);
+                    }
+                });
+            }
+
+
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+
+*/
+
+
 
 
     }
@@ -287,8 +413,12 @@ if(mCurrentLocation != null){
     @Override
     public void onLocationChanged(Location location) {
      //   CameraUpdateFactory.newLatLngBounds(bounds, 0)
-        initCamera(location);
+       // initCamera(location);
     }
 
 
+    @Override
+    public void onCameraMove() {
+
+    }
 }

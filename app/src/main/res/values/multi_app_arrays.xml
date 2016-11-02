@@ -40,5 +40,8 @@
         <item >For 12 weeks</item>
     </string-array>
 
+    <string-array name="reglongclick">\
+        <item>Delete</item>
+    </string-array>
 
 </resources>

@@ -9,16 +9,6 @@
     android:paddingTop="5dp"
     android:paddingBottom="5dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Available"
-        android:id="@+id/textView6"
-        android:textSize="10dp"
-        android:drawableLeft="@drawable/ic_fiber_manual_record_green_24dp"
-        android:layout_gravity="right"
-        android:textStyle="italic" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -26,7 +16,7 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_width="60dp"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             app:civ_border="false"
 
             android:src="@drawable/profile"

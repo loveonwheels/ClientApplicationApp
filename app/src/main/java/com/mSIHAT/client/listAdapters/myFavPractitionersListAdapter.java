@@ -20,20 +20,20 @@ import java.util.List;
 /**
  * Created by alamchristian on 4/1/16.
  */
-public class AvailablePractitionersListAdapter extends BaseAdapter {
+public class myFavPractitionersListAdapter extends BaseAdapter {
 
     List<Practitioner> practitioners = null;
     Context context;
     private static LayoutInflater inflater = null;
     int type = 0;
 
-    public AvailablePractitionersListAdapter(Context context, List<Practitioner> practitioners){
+    public myFavPractitionersListAdapter(Context context, List<Practitioner> practitioners){
         this.context = context;
         this.practitioners = practitioners;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public AvailablePractitionersListAdapter(Context context, List<Practitioner> practitioners,int type){
+    public myFavPractitionersListAdapter(Context context, List<Practitioner> practitioners, int type){
         this.context = context;
         this.practitioners = practitioners;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,7 +59,7 @@ public class AvailablePractitionersListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(view == null){
-            view = inflater.inflate(R.layout.list_row_available_practitioners, null);
+            view = inflater.inflate(R.layout.list_row_fav_practitioners, null);
         }
         TextView text_name = (TextView) view.findViewById(R.id.text_list_row_practitioner_name);
         TextView text_nric = (TextView) view.findViewById(R.id.text_list_row_practitioner_nric);
@@ -78,7 +78,7 @@ public class AvailablePractitionersListAdapter extends BaseAdapter {
 
 
 
-        text_nric.setText(this.practitioners.get(position).gender+ " | "+separated[0]);
+        text_nric.setText(this.practitioners.get(position).gender+" | >"+this.practitioners.get(position).level+" | "+separated[0]);
         text_gender.setText("Certified "+separated[1]);
         text_language.setText(this.practitioners.get(position).language);
 

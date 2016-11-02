@@ -21,6 +21,7 @@ public class PractitionerAvail implements Parcelable{
     public int starttime;
     public int endtime;
     public List<Integer> unavailableslot;
+    public List<String> availabledate;
 
     public PractitionerAvail(){
 

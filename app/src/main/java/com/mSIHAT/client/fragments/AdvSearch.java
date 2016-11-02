@@ -1,5 +1,6 @@
 package com.mSIHAT.client.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,8 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.mSIHAT.client.R;
+import com.mSIHAT.client.listAdapters.PartialAvailablePractitionersListAdapter;
+import com.mSIHAT.client.models.PractitionerPartial;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,8 +34,11 @@ public class AdvSearch extends DialogFragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int timereq;
+    private String searchDate;
+    private int frequency;
+
+    public List<PractitionerPartial> practitioners;
 
     private OnFragmentInteractionListener mListener;
 
@@ -39,14 +46,7 @@ public class AdvSearch extends DialogFragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AdvSearch.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static AdvSearch newInstance(ArrayList pracList, String DateReq,int timeReq,int frequency) {
         AdvSearch fragment = new AdvSearch();
@@ -63,16 +63,28 @@ public class AdvSearch extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+           timereq = getArguments().getInt("timereq");
+            searchDate = getArguments().getString("Date");
+            frequency = getArguments().getInt("frq");
+          practitioners = getArguments().getParcelableArrayList("pracList");
+
+
         }
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.alerttheme2);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_adv_search, container, false);
+       View view = inflater.inflate(R.layout.fragment_adv_search, container, false);
+        getDialog().requestWindowFeature(STYLE_NO_TITLE);
+
+ListView listview = (ListView)view.findViewById(R.id.partialList);
+        PartialAvailablePractitionersListAdapter thelist = new PartialAvailablePractitionersListAdapter(getContext(),practitioners);
+        listview.setAdapter(thelist);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -89,16 +101,28 @@ public class AdvSearch extends DialogFragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog d = getDialog();
+        if (d != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            d.getWindow().setLayout(width, height);
+        }
+    }
+
+        /**
+         * This interface must be implemented by activities that contain this
+         * fragment to allow an interaction in this fragment to be communicated
+         * to the activity and potentially other fragments contained in that
+         * activity.
+         * <p>
+         * See the Android Training lesson <a href=
+         * "http://developer.android.com/training/basics/fragments/communicating.html"
+         * >Communicating with Other Fragments</a> for more information.
+         */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

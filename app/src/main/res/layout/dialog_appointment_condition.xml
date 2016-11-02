@@ -28,12 +28,12 @@
                     android:layout_marginTop="@dimen/input_field_vertical_margin"
                     android:drawablePadding="@dimen/edit_drawable_horizontal_padding"
                     android:hint="description"
-                    android:inputType="text"
+                    android:inputType="text|textMultiLine"
                     android:paddingBottom="@dimen/input_field_vertical_padding"
                     android:paddingLeft="@dimen/input_field_horizontal_padding"
                     android:paddingStart="@dimen/input_field_horizontal_padding"
                     android:lines="4"
-                    android:minLines="4" />
+                    android:minLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 

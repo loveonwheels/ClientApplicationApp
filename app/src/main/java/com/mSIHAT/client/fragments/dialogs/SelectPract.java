@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -90,6 +91,7 @@ public class SelectPract extends DialogFragment {
     private String mParam1;
     private String mParam2;
     TextView input_sch_time;
+    CheckBox chkFavListOnly;
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Constants.PAYPAL_CLIENT_ID);
@@ -97,6 +99,7 @@ public class SelectPract extends DialogFragment {
     public static final int CONDITION_DIALOG = 173;
     public static final int PAYMENT_REQUEST_CODE = 201;
     private static final int RequestCode2 = 13402;
+    private static final int RequestCode3 = 13477;
 Spinner gender_spinner,frq_spinner;
     int gender = 0;
     int frequency = 0;
@@ -108,6 +111,7 @@ Spinner gender_spinner,frq_spinner;
     int listselectiontype = 0;
     private Bundle query_bundle;
     private boolean isMulti;
+    int user_id;
     int[] condition_ids;
     TextView input_sch_date;
     Fragment thisfragment = this;
@@ -138,13 +142,14 @@ Spinner gender_spinner,frq_spinner;
      * @return A new instance of fragment SelectPract.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectPract newInstance(int param1, int param2) {
+    public static SelectPract newInstance(int param1, int param2,int userid) {
         SelectPract fragment = new SelectPract();
         Bundle args = new Bundle();
 
 
         args.putInt(Constants.EXTRA_PATIENT_ID, param1);
         args.putInt(Constants.EXTRA_SUBSERVICE_ID, param2);
+        args.putInt(Constants.EXTRA_USER_ID,userid);
 
         fragment.setArguments(args);
         return fragment;
@@ -187,6 +192,8 @@ Spinner gender_spinner,frq_spinner;
         gender_spinner = (Spinner)view.findViewById(R.id.spinner_gender);
                 frq_spinner = (Spinner)view.findViewById(R.id.spinner_frq);
         ImageView bckBtn = (ImageView) view.findViewById(R.id.imgBack);
+        chkFavListOnly = (CheckBox) view.findViewById(R.id.checkBox);
+
         bckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,19 +210,16 @@ Spinner gender_spinner,frq_spinner;
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 selectionposition = position;
-                if(listselectiontype == 1){
-
-                    Log.e("open available time",String.valueOf(userAppiontments.get(0).starttime));
-                    Log.e("open available time",String.valueOf(userAppiontments.get(0).unavailableslot.get(0)));
+                if(listselectiontype == 1) {
 
                     FragmentManager manager = getFragmentManager();
                     int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.size()];
-                    for(int i = 0;i<userAppiontments.get(position).unavailableslot.size();i++){
+                    for (int i = 0; i < userAppiontments.get(position).unavailableslot.size(); i++) {
                         unavailableslot[i] = userAppiontments.get(position).unavailableslot.get(i);
 
                     }
-                    SlotDialogFragment slotDialogFragment = SlotDialogFragment.newInstance(RequestCode2,userAppiontments.get(position).starttime,userAppiontments.get(position).endtime,unavailableslot);
-                    slotDialogFragment.setTargetFragment(thisfragment,RequestCode2);
+                    SlotDialogFragment slotDialogFragment = SlotDialogFragment.newInstance(RequestCode2, userAppiontments.get(position).starttime, (userAppiontments.get(position).endtime - 1), unavailableslot);
+                    slotDialogFragment.setTargetFragment(thisfragment, RequestCode2);
                     slotDialogFragment.show(manager, "timeslots");
 
 
@@ -224,6 +228,17 @@ Spinner gender_spinner,frq_spinner;
                     availableTime.setTargetFragment(AvailablePractitionersFragment.this, 1438);
                     availableTime.show(fm, "fragment_avaiable_times");
 */
+                }else if(listselectiontype == 2){
+
+                        FragmentManager manager = getFragmentManager();
+                        String availabledate[] = new String[userAppiontments.get(position).availabledate.size()];
+                        for(int i = 0;i<userAppiontments.get(position).availabledate.size();i++){
+                            availabledate[i] = userAppiontments.get(position).availabledate.get(i);
+
+                        }
+                        SlotDateDialogFragment slotDateDialogFragment = SlotDateDialogFragment.newInstance(RequestCode3,availabledate);
+                        slotDateDialogFragment.setTargetFragment(thisfragment,RequestCode3);
+                        slotDateDialogFragment.show(manager, "dateslots");
 
 
                 }else {
@@ -249,7 +264,40 @@ Spinner gender_spinner,frq_spinner;
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getAvailablePractitioners();
+
+                Log.e("input value",input_sch_date.getText().toString());
+                if( input_sch_date.getText().toString().equals("Select Date") || input_sch_date.getText().toString().equals(" Select Date")) {
+
+                    //input schedule date
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
+                    builder.setMessage("Please select a date for the appointment")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+
+                }else if( input_sch_time.getText().toString().equals("Select Time") || input_sch_time.getText().toString().equals(" Select Time")) {
+
+                    //input schedule date
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
+                    builder.setMessage("Please select a time for the appointment")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                }
+                            });
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+                }else{
+                        getAvailablePractitioners();
+
+                }
+
             }
         });
 
@@ -310,7 +358,13 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(postcode -> {
                     query_bundle.putInt(Constants.EXTRA_CITY_ID, postcode.city_id);
-                    getPractitioners();
+
+                    if(chkFavListOnly.isChecked()){
+                        getFavPractitioners();
+                    }else{
+                        getPractitioners();
+                    }
+
                 }, throwable -> {
                     Toast.makeText(getContext(),
                             R.string.error, Toast.LENGTH_SHORT).show();
@@ -380,7 +434,7 @@ linTime.setOnClickListener(new View.OnClickListener() {
                     if(pracList.size() > 0){
 
                         Log.e("here21","here21");
-                        listselectiontype = 2;
+
                         practitioners_list.setAdapter(new AvailablePractitionersListAdapter(getActivity().getBaseContext(), pracList));
 
                         //         practitioners_list.setOnItemClickListener(getActivity());
@@ -474,7 +528,169 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 */
     }
 
+    private void getFavPractitioners(){
+        Log.e("here121","here121");
 
+        listselectiontype = 0;
+        practitioners = new ArrayList<>();
+        Log.e("here122","here122");
+        int subservice_id = query_bundle.getInt(Constants.EXTRA_SUBSERVICE_ID);
+        Log.e("here123","here123");
+        int city_id = query_bundle.getInt(Constants.EXTRA_CITY_ID);
+        Log.e("here124","here124");
+        String DateReq = input_sch_date.getText().toString();
+
+        int timeReq = starttime.getTimevalue();
+        Log.e("here125","here1215");
+        Observable<List<Practitioner>> availablePractitioners = Observable.empty();
+        Log.e("here12","here12");
+        if(isMulti){
+            Log.e("here13","here13");
+            boolean isDaily = query_bundle.getBoolean(Constants.EXTRA_MULTI_APPOINTMENT_FREQUENCY);
+            int amount = query_bundle.getInt(Constants.EXTRA_MULTI_APPOINTMENT_AMOUNT);
+            // availablePractitioners = practitionerServiceRx.service.getAvailablePractitionersForMulti(subservice_id, city_id,
+            // apiDatetime, String.valueOf(isDaily), amount);
+        } else {
+            Log.e("here14","here14");
+            //  availablePractitioners = practitionerServiceRx.service.getAvailablePractitioners(subservice_id,
+            //city_id, apiDatetime);
+        }
+
+        Log.e("here114","here114");
+
+        Log.e("dfdfdf",String.valueOf(subservice_id));
+        Log.e("dfdfdf",String.valueOf(city_id));
+        Log.e("dfdfdf",String.valueOf(DateReq));
+        Log.e("dfdfdf",String.valueOf(timeReq));
+
+
+        Call<List<Practitioner>> call = restPracService.getService().getFavAvailablePractitioners(subservice_id,
+                city_id, DateReq,timeReq,gender,frequency,query_bundle.getInt(Constants.EXTRA_USER_ID));
+        Log.e("gender4",String.valueOf(gender));
+
+        call.enqueue(new Callback<List<Practitioner>>() {
+            @Override
+            public void onResponse(Call<List<Practitioner>> call, Response<List<Practitioner>> response) {
+
+                Log.e("hereunkown","2324");
+                int statusCode = response.code();
+                pracList = response.body();
+                String msg = "here";
+
+
+
+                if (statusCode == 200) {
+
+
+
+                    if(pracList.size() > 0){
+
+                        Log.e("here21","here21");
+                        practitioners_list.setAdapter(new AvailablePractitionersListAdapter(getActivity().getBaseContext(), pracList));
+
+                        //         practitioners_list.setOnItemClickListener(getActivity());
+
+
+                        progressDialog.dismiss();
+                    }else{
+
+                        Log.e("no appointmnet","no appointment found");
+                        /*
+                        Log.e("here211","here211");
+                        progressDialog.dismiss();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        Suggestpersonnel editNameDialog = new Suggestpersonnel();
+
+                        editNameDialog.setTargetFragment(SelectPract.this, 1337);
+                        editNameDialog.show(fm, "fragment_suggestpersonnel");
+                        if(progressDialog.isShowing())
+                            progressDialog.dismiss();
+*/
+
+                    }
+
+
+                    //  progress.dismiss();
+                }else{
+
+                    Log.e("dfdf2", String.valueOf(statusCode));
+
+                    Log.e("here211","here211");
+
+                    if(frequency == 0){
+                        if(progressDialog.isShowing())
+                            progressDialog.dismiss();
+                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
+                        builder.setMessage("Your favorite Practitioners are not available for this appointment let the system find other practitioners ? ")
+                                .setCancelable(false)
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                    }
+                                })
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        progressDialog.setMessage("searching for practitioner");
+                                        chkFavListOnly.setChecked(false);
+                                        progressDialog.show();
+                                        getPractitioners();
+                                    }
+                                });
+                        android.app.AlertDialog alert = builder.create();
+                        alert.show();
+
+                    }else{
+
+                        //check for partial match
+                        partialmatch();
+                    }
+
+
+
+                }
+                Log.e("dfdf1", msg);
+
+            }
+
+
+
+            @Override
+            public void onFailure(Call<List<Practitioner>> call, Throwable t) {
+                //   progress.dismiss();
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(),"request failed",Toast.LENGTH_LONG).show();
+
+                //   Log.e("dfdf", t.toString());
+            }
+        });
+     /*   availablePractitioners
+                .flatMapIterable(pracs -> pracs)
+                .toList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(list -> {
+
+                    if(practitioners.size() > 0) {
+                        Log.e("here17","here17");
+                        practitioners_list.setAdapter(new AvailablePractitionersListAdapter(this.getActivity(), practitioners));
+                        practitioners_list.setOnItemClickListener(this);
+                    }else{
+
+                        Log.e("here18","here18");
+                    }
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
+                }, throwable -> {
+                    Log.e("here16","here16");
+                    Toast.makeText(AvailablePractitionersFragment.this.getContext(),
+                           throwable.toString(), Toast.LENGTH_SHORT).show();
+                    throwable.printStackTrace();
+                    Log.e("here161", throwable.toString());
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
+                });
+                */
+    }
 
     public void setDate(final TextView input_dob, View view, LinearLayout linear){
         input_dob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -521,9 +737,10 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 input_sch_time.setText(starttime.getTimeStringvalue());
 
                 break;
-            case RequestCode2:
+            case RequestCode3:
                 Log.e("herer124","Sdsd");
-                query_bundle.putInt(Constants.EXTRA_APPOINTMENT_TIME,data.getIntExtra("timevalue", 0));
+                input_sch_date.setText(data.getStringExtra("dateValue"));
+                query_bundle.putInt(Constants.EXTRA_APPOINTMENT_TIME,starttime.getTimevalue());
                 new_appointment = new Appointment2();
                 new_appointment.practitioner_id = userAppiontments.get(selectionposition).hcpid;
                 new_appointment.slot_id = Integer.parseInt(userAppiontments.get((int) selectionposition).phonenumber);
@@ -538,6 +755,26 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 PatientConditionDialog conditionDialog = PatientConditionDialog.newInstance(bundle);
                 conditionDialog.setTargetFragment(SelectPract.this, CONDITION_DIALOG);
                 conditionDialog.show(getActivity().getSupportFragmentManager(), "conditionDialog");
+
+                break;
+            case RequestCode2:
+                Log.e("herer124","Sdsd");
+                starttime = new TimeSlots(data.getIntExtra("timevalue", 0), true);
+                query_bundle.putInt(Constants.EXTRA_APPOINTMENT_TIME,data.getIntExtra("timevalue", 0));
+                new_appointment = new Appointment2();
+                new_appointment.practitioner_id = userAppiontments.get(selectionposition).hcpid;
+                new_appointment.slot_id = Integer.parseInt(userAppiontments.get((int) selectionposition).phonenumber);
+                Bundle bundle2 = new Bundle();
+                // bundle.putInt(Constants.EXTRA_SUBSERVICE_ID, query_bundle.getInt(Constants.EXTRA_SUBSERVICE_ID));
+                bundle2.putInt(Constants.EXTRA_SUBSERVICE_ID, 60);
+                bundle2.putInt(Constants.EXTRA_PRACTITIONER_ID, userAppiontments.get((int) selectionposition).hcpid);
+                bundle2.putInt(Constants.EXTRA_SLOT_ID, Integer.parseInt(userAppiontments.get((int) selectionposition).phonenumber));
+                if (isMulti) {
+                    bundle2.putInt(Constants.EXTRA_MULTI_APPOINTMENT_AMOUNT, query_bundle.getInt(Constants.EXTRA_MULTI_APPOINTMENT_AMOUNT));
+                }
+                PatientConditionDialog conditionDialog2 = PatientConditionDialog.newInstance(bundle2);
+                conditionDialog2.setTargetFragment(SelectPract.this, CONDITION_DIALOG);
+                conditionDialog2.show(getActivity().getSupportFragmentManager(), "conditionDialog");
 
                 break;
             case CONDITION_DIALOG:
@@ -589,6 +826,9 @@ linTime.setOnClickListener(new View.OnClickListener() {
 ;
 
                             new_appointment.appointment_date = input_sch_date.getText().toString();
+
+
+
                             new_appointment.appointment_start_time = starttime.getTimevalue();
                             new_appointment.appointment_end_time = (starttime.getTimevalue()+1);
                             appointmentService = new RestAppointmentService();
@@ -922,6 +1162,8 @@ linTime.setOnClickListener(new View.OnClickListener() {
 
     public void searchfordifferenttime(){
         Log.e("here121","here121");
+        progressDialog.setMessage("searching for practitioner");
+        progressDialog.show();
         listselectiontype = 1;
         practitioners = new ArrayList<>();
         Log.e("here122","here122");
@@ -929,7 +1171,7 @@ linTime.setOnClickListener(new View.OnClickListener() {
         Log.e("here123","here123");
         int city_id = query_bundle.getInt(Constants.EXTRA_CITY_ID);
         Log.e("here124","here124");
-        String search_date = query_bundle.getString(Constants.EXTRA_APPOINTMENT_DATE);
+        String search_date = input_sch_date.getText().toString();
         Log.e("here125","here1215");
         Observable<List<Practitioner>> availablePractitioners = Observable.empty();
         Log.e("here12","here12");
@@ -1045,15 +1287,18 @@ linTime.setOnClickListener(new View.OnClickListener() {
     }
 
     public void searchfordifferentdate(){
+
+        progressDialog.setMessage("searching for practitioner");
+        progressDialog.show();
         Log.e("here121","here121");
-        listselectiontype = 1;
+        listselectiontype = 2;
         practitioners = new ArrayList<>();
         Log.e("here122","here122");
         int subservice_id = query_bundle.getInt(Constants.EXTRA_SUBSERVICE_ID);
         Log.e("here123","here123");
         int city_id = query_bundle.getInt(Constants.EXTRA_CITY_ID);
         Log.e("here124","here124");
-        int search_time = query_bundle.getInt(Constants.EXTRA_APPOINTMENT_TIME);
+        int search_time = starttime.getTimevalue();
         Log.e("here125","here1215");
         Observable<List<Practitioner>> availablePractitioners = Observable.empty();
         Log.e("here12","here12");
@@ -1090,6 +1335,8 @@ linTime.setOnClickListener(new View.OnClickListener() {
 
                         Log.e("here21","here21 SUGGEST TIME");
                         Log.e("here21",String.valueOf(userAppiontments.get(0).starttime));
+                        //practitioners_list.setAdapter(new AvailablePractitionersListAdapter(getActivity().getBaseContext(), pracList));
+
                         practitioners_list.setAdapter(new AvailablePractitionersAvailListAdapter(getActivity().getBaseContext(), userAppiontments));
                         //         practitioners_list.setOnItemClickListener(getActivity());
 

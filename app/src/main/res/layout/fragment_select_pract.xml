@@ -169,6 +169,12 @@
                     android:padding="5dp" />
             </LinearLayout>
 
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check to refine search to your favorite list"
+                android:id="@+id/checkBox" />
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -217,7 +223,8 @@
                     android:id="@+id/textView5"
                     android:padding="8dp"
                     android:textAlignment="center"
-                    android:textColor="#fff" />
+                    android:textColor="#fff"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <ListView
