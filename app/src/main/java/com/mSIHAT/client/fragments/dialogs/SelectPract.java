@@ -899,10 +899,10 @@ linTime.setOnClickListener(new View.OnClickListener() {
         progressDialog.show();
         //  Log.e("appiontme",new_appointment.additionalinformation);
 
-        Call<Appointment> postAppointment = appointmentService.getService().postAppointment(new_appointment);
-        postAppointment.enqueue(new Callback<Appointment>() {
+        Call<String> postAppointment = appointmentService.getService().postAppointment(new_appointment);
+        postAppointment.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<Appointment> call, Response<Appointment> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if(response.code() == 201){
 
                     //  app_condition.appointment_id = response.body().appointment_id;
@@ -921,13 +921,13 @@ linTime.setOnClickListener(new View.OnClickListener() {
 
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    dismiss();
                                 }
                             });
 
                     android.app.AlertDialog alert = builder.create();
                     alert.show();
-                    dismiss();
+
 
                 }
                 else {
@@ -940,7 +940,7 @@ linTime.setOnClickListener(new View.OnClickListener() {
             }
 
             @Override
-            public void onFailure(Call<Appointment> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
               //  mListener.OnPostCompleted(false);
 
                 Log.e("failed",t.getMessage());

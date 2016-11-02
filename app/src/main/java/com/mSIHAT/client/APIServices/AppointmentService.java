@@ -18,7 +18,7 @@ import retrofit2.http.Path;
  */
 public interface AppointmentService {
     @POST("appointments")
-    Call<Appointment> postAppointment(@Body Appointment2 appointment);
+    Call<String> postAppointment(@Body Appointment2 appointment);
     @POST("appointments/conditions/add")
     Call<ConditionPost> postAppointmentCondition(@Body ConditionPost condition);
 

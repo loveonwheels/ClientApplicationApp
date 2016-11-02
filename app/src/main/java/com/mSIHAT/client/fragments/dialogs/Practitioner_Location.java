@@ -16,9 +16,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.mSIHAT.client.APIServices.RestPractitionerService;
 import com.mSIHAT.client.APIServices.ServiceGenerator;
 import com.mSIHAT.client.FileUploadServic;
 import com.mSIHAT.client.R;
@@ -28,6 +31,10 @@ import com.mSIHAT.client.map.MapFragment2;
 import com.mSIHAT.client.models.Pratitioner2;
 import com.mSIHAT.client.models.views.AppointmentDetails;
 import com.mSIHAT.client.models.views.PatientAppointment;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -60,7 +67,8 @@ public class Practitioner_Location extends DialogFragment {
     public static PatientAppointment patient;
     private AppointmentDetails appDet;
     private int userid;
-
+    CircularImageView searchView ;
+    private RestPractitionerService restPracService = new RestPractitionerService();
     TextView prac_name,prac_time;
 
     // TODO: Rename and change types of parameters
@@ -107,6 +115,16 @@ public class Practitioner_Location extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_practitioner__location, container, false);
 
         getDialog().requestWindowFeature(STYLE_NO_TITLE);
+
+        ImageView bckBtn = (ImageView) view.findViewById(R.id.imgBack2);
+       searchView = (CircularImageView ) view.findViewById(R.id.prac_image);
+        bckBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
         prac_name = (TextView)view.findViewById(R.id.pracName);
         prac_time = (TextView)view.findViewById(R.id.pracTime);
         prac_name.setText(practitioner.practitioner_fullname+" is");
@@ -116,6 +134,7 @@ public class Practitioner_Location extends DialogFragment {
         temp.setLongitude(101);
 
         gettime(patient.patient_address,getAddressFromLatLng(temp));
+        getImageUrl();
         return view;
     }
 
@@ -258,5 +277,32 @@ public class Practitioner_Location extends DialogFragment {
         }
 
 
+    }
+
+    private void getImageUrl(){
+        Log.e("user is",String.valueOf(practitioner.practitioner_id));
+        Call<String> postAppointment = restPracService.getService().getPracImage(practitioner.practitioner_id);
+        postAppointment.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.code() == 200){
+                    Log.e("url",response.body());
+                    Picasso.with(getContext())
+                            .load(response.body())
+                            .fit().centerCrop()
+                            .networkPolicy(NetworkPolicy.NO_CACHE)
+                            .memoryPolicy(MemoryPolicy.NO_CACHE)
+                            .into(searchView);
+                }
+                else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 }

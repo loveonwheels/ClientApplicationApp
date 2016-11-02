@@ -84,5 +84,9 @@ public interface PractitionerService {
     Call<String> deletefavourite(@Query("practitioner_id") int practitioner_id,@Query("user_id") int userid
     );
 
+    @GET("Hcp_Location/getImage")
+    Call<String> getPracImage(@Query("userid") int userid
+    );
+
 
 }

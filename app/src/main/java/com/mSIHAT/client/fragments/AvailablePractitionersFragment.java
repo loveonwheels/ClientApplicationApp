@@ -849,10 +849,10 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
         progressDialog.show();
       //  Log.e("appiontme",new_appointment.additionalinformation);
         new_appointment.subservice_id = 1;
-        Call<Appointment> postAppointment = appointmentService.getService().postAppointment(new_appointment);
-        postAppointment.enqueue(new Callback<Appointment>() {
+        Call<String> postAppointment = appointmentService.getService().postAppointment(new_appointment);
+        postAppointment.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<Appointment> call, Response<Appointment> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if(response.code() == 201){
 
                  //  app_condition.appointment_id = response.body().appointment_id;
@@ -868,7 +868,7 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
             }
 
             @Override
-            public void onFailure(Call<Appointment> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 mListener.OnPostCompleted(false);
                 if(progressDialog.isShowing())
                     progressDialog.dismiss();
