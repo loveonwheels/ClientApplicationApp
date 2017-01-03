@@ -107,8 +107,10 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                                     if (response.code() == 201) {
                                         progressDialog.dismiss();
                                         login(response.body().id);
+                                        Log.e("heelo",String.valueOf(response.code()));
                                     }else
                                     {
+                                        Log.e("heelo",String.valueOf(response.code()));
                                         Toast.makeText(SignupFragment.this.getContext(), response.message(), Toast.LENGTH_LONG).show();
                                         progressDialog.dismiss();
 
@@ -117,6 +119,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
                                 @Override
                                 public void onFailure(Call<UserP> call, Throwable t) {
+                                    Log.e("heelo",String.valueOf(t.getMessage()));
                                     Toast.makeText(SignupFragment.this.getContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
                                     t.printStackTrace();
@@ -132,8 +135,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                             R.string.password_needs_to_be_at_least_8_chars_long, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(getActivity(),
-                            String.valueOf(checkEntries()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Enter a vaild email", Toast.LENGTH_SHORT).show();
 
                 }
             } else if (v.getId() == R.id.btn_signup_cancel) {
@@ -188,6 +190,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     }
 
     private void login(int id){
+        Log.e("aher","Sdsd");
         progressDialog = new ProgressDialog(this.getContext());
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.logging_in));

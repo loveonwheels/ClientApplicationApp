@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.mSIHAT.client.APIServices.RestAddressService;
 import com.mSIHAT.client.APIServices.RestPatientService;
 import com.mSIHAT.client.R;
+import com.mSIHAT.client.fragments.dialogs.SelectPract;
 import com.mSIHAT.client.fragments.dialogs.selectors.CitySelectionDialog;
 import com.mSIHAT.client.fragments.dialogs.selectors.CountrySelectionDialog;
 import com.mSIHAT.client.fragments.dialogs.selectors.PostcodeSelectionDialog;
@@ -212,6 +213,8 @@ public class PatientRegistrationFragment extends Fragment implements View.OnClic
                                     Toast.makeText(PatientRegistrationFragment.this.getContext(),
                                             R.string.patient_with_this_nric_is_already_registered,
                                             Toast.LENGTH_SHORT).show();
+
+
                                 }
                                 progressDialog.dismiss();
 

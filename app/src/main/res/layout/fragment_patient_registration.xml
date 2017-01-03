@@ -186,8 +186,9 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/button_action_height"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryLight"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/btn_patient_register"
@@ -195,8 +196,9 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/button_action_height"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:text="@string/register" />
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/register"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </RelativeLayout>

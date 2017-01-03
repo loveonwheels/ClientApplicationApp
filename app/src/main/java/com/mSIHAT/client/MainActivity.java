@@ -43,6 +43,7 @@ import com.mSIHAT.client.fragments.MyFavourite;
 import com.mSIHAT.client.fragments.MyPatientsFragment;
 import com.mSIHAT.client.fragments.NewAppointmentFragment;
 import com.mSIHAT.client.fragments.ServicesFragment;
+import com.mSIHAT.client.fragments.dialogs.RatingFragment;
 import com.mSIHAT.client.fragments.dialogs.SelectPract;
 import com.mSIHAT.client.fragments.pagerAdapters.AppointmentsFragmentPagerAdapter;
 import com.mSIHAT.client.models.Appointment;
@@ -293,7 +294,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_my_favourite:
                 setTitle("My Favourite");
                 removeAppointmentsComponents();
-                fragTransaction.replace(R.id.container_frag_main, MyFavourite.newInstance(user_id),
+               fragTransaction.replace(R.id.container_frag_main, MyFavourite.newInstance(user_id),
                         Constants.MAIN_FRAGMENT_TAG).commit();
                 break;
             case R.id.nav_my_patients:
@@ -337,23 +338,33 @@ public class MainActivity extends AppCompatActivity
         }
 
         */
-
-        Log.e("paypal got here in m","here");
-        Log.e("paypal got here",String.valueOf(requestCode));
-        Log.e("paypal got here",String.valueOf(resultCode));
-
-
-          if(resultCode == Activity.RESULT_OK){
-              Log.e("paypal got here","here");
-              Fragment fragment = getSupportFragmentManager().findFragmentByTag("singleTimeDialog");
-              fragment.onActivityResult(SelectPract.PAYMENT_REQUEST_CODE, resultCode, data);
-
-          } else if (resultCode == Activity.RESULT_CANCELED){
-              if(requestCode == NewAppointmentFragment.ACTIVITY_RESULT_NEWAPP) {
-              }
-          }
+try {
+    Log.e("paypal got here in m", "here");
+    Log.e("paypal got here", String.valueOf(requestCode));
+    Log.e("paypal got here", String.valueOf(resultCode));
 
 
+    if (resultCode == Activity.RESULT_OK) {
+        Log.e("paypal got here", "here");
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("singleTimeDialog");
+        fragment.onActivityResult(SelectPract.PAYMENT_REQUEST_CODE, resultCode, data);
+
+    } else if (resultCode == Activity.RESULT_CANCELED) {
+        if (requestCode == NewAppointmentFragment.ACTIVITY_RESULT_NEWAPP) {
+        }
+        if (resultCode == 1771 || resultCode == 1772) {
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.MAIN_FRAGMENT_TAG);
+            fragment.onActivityResult(Constants.ACTIVITY_RESULT_PATIENT_REGISTER, Constants.ACTIVITY_RESULT_PATIENT_REGISTER, data);
+        }
+    }else if (resultCode == 1771 || resultCode == 1772 || resultCode == 1773) {
+        Log.e("am here", "here 1232");
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.MAIN_FRAGMENT_TAG);
+        fragment.onActivityResult(Constants.ACTIVITY_RESULT_PATIENT_REGISTER, Constants.ACTIVITY_RESULT_PATIENT_REGISTER, data);
+    }
+
+}catch(Exception ex){
+
+}
 
 
     }

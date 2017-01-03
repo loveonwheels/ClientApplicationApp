@@ -1,8 +1,10 @@
 package com.mSIHAT.client.fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mSIHAT.client.R;
+import com.mSIHAT.client.fragments.dialogs.RatingFragment;
 
 
 /**
@@ -68,7 +71,16 @@ public class Welcomepage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_welcomepage, container, false);
+       Button takeatour = (Button)view.findViewById(R.id.btnTakeatour);
 
+        takeatour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  FragmentManager fm = getActivity().getSupportFragmentManager();
+               // onBraintreeSubmit(v);
+
+            }
+        });
         TextView signup = (TextView)view.findViewById(R.id.textView36);
         Button signBtn = (Button)view.findViewById(R.id.signBtn);
         signBtn.setOnClickListener(new View.OnClickListener() {
@@ -103,11 +115,13 @@ public class Welcomepage extends Fragment {
     }
 
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+
 
     /**
      * This interface must be implemented by activities that contain this

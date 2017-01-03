@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.mSIHAT.client.APIServices.rxretrofit.RestAppointmentServiceRx;
 import com.mSIHAT.client.APIServices.rxretrofit.RestForServicesRx;
 import com.mSIHAT.client.APIServices.rxretrofit.RestPatientServiceRx;
 import com.mSIHAT.client.R;
+import com.mSIHAT.client.fragments.dialogs.RatingFragment;
+import com.mSIHAT.client.fragments.dialogs.SelectPract;
 import com.mSIHAT.client.listAdapters.AppointmentsListAdapter;
 import com.mSIHAT.client.models.Appointment;
 import com.mSIHAT.client.models.Patient;
@@ -32,7 +35,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class AppointmentsFragment extends Fragment implements ListView.OnItemClickListener {
+public class AppointmentsFragment extends Fragment{
     private ProgressDialog progressDialog;
     private ListView appointments_list;
 
@@ -95,6 +98,16 @@ public class AppointmentsFragment extends Fragment implements ListView.OnItemCli
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_appointments, container, false);
         appointments_list = (ListView) rootView.findViewById(R.id.list_appointments);
+        appointments_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                RatingFragment singleDialog =  RatingFragment.newInstance(appointmentsList.get(position).appointment_id);
+                singleDialog.setTargetFragment(AppointmentsFragment.this, 10234);
+                singleDialog.show(getActivity().getSupportFragmentManager(), "detailsDialog");
+            }
+        });
+
+
         emptyListLinear = (LinearLayout) rootView.findViewById(R.id.linear_empty_list_appointments);
         if (multi_appointment_id == 0) {
             getSingleAppointmentsResponse();
@@ -105,16 +118,7 @@ public class AppointmentsFragment extends Fragment implements ListView.OnItemCli
         return rootView;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnAppointmentsFragmentInteractionListener) {
-            mListener = (OnAppointmentsFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnAppointmentsFragmentInteractionListener");
-        }
-    }
+
 
     @Override
     public void onDetach() {
@@ -122,12 +126,7 @@ public class AppointmentsFragment extends Fragment implements ListView.OnItemCli
         mListener = null;
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(mListener != null){
-            mListener.onAppointmentItemClick(id);
-        }
-    }
+
 
     public interface OnAppointmentsFragmentInteractionListener {
         void onAppointmentItemClick(long appointment_id);
@@ -230,12 +229,11 @@ public class AppointmentsFragment extends Fragment implements ListView.OnItemCli
                     appointments_list
                             .setAdapter(new AppointmentsListAdapter(this.getActivity(),
                                     appointmentsList));
-                    appointments_list
-                            .setOnItemClickListener(this);
+
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
                 }, throwable -> {
-                    Toast.makeText(AppointmentsFragment.this.getContext(),
+                    Toast.makeText(getContext(),
                             "i have found 2"+R.string.error,
                             Toast.LENGTH_LONG).show();
                     if(progressDialog.isShowing())

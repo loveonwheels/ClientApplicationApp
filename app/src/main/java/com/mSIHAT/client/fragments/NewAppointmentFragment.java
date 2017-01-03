@@ -142,7 +142,7 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
     private void retrievePatients() {
         progressDialog = new ProgressDialog(this.getContext());
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage(callingActivity.getString(R.string.preparing));
+        progressDialog.setMessage("preparing 1234");
         progressDialog.show();
         Call<ArrayList<PatientSelectionItem>> callPatients = patientRest.getService().getPatientsOfUserIdArrayList(user_id);
         callPatients.enqueue(new Callback<ArrayList<PatientSelectionItem>>() {

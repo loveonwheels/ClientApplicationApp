@@ -55,10 +55,10 @@ public class UpdateDetailsActivity extends AppCompatActivity implements PatientR
     @Override
     public void onPatientRegistrationButtonClick(boolean confirm) {
         if(confirm){
-            setResult(Activity.RESULT_OK);
+            setResult(1771);
             this.finish();
         } else {
-            setResult(Activity.RESULT_CANCELED);
+            setResult(1772);
             this.finish();
         }
     }
@@ -66,10 +66,10 @@ public class UpdateDetailsActivity extends AppCompatActivity implements PatientR
     @Override
     public void onButtonActionBarButtonClick(boolean confirm) {
         if(confirm){
-            setResult(Activity.RESULT_OK);
+            setResult(1771);
             this.finish();
         } else {
-            setResult(Activity.RESULT_CANCELED);
+            setResult(1772);
             this.finish();
         }
     }

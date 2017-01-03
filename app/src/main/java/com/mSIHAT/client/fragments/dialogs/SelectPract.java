@@ -13,11 +13,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -172,12 +174,10 @@ Spinner gender_spinner,frq_spinner;
             intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
             getActivity().startService(intent);
         }
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.alerttheme2);
-
+       setStyle(DialogFragment.STYLE_NO_TITLE, R.style.alerttheme2);
+     //   getActivity().dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
     }
-
-
 
 
     @Override
@@ -247,7 +247,7 @@ Spinner gender_spinner,frq_spinner;
                     new_appointment.slot_id = Integer.parseInt(pracList.get((int) position).phonenumber);
                     Bundle bundle = new Bundle();
                     // bundle.putInt(Constants.EXTRA_SUBSERVICE_ID, query_bundle.getInt(Constants.EXTRA_SUBSERVICE_ID));
-                    bundle.putInt(Constants.EXTRA_SUBSERVICE_ID, 60);
+                    bundle.putInt(Constants.EXTRA_SUBSERVICE_ID, 5);
                     bundle.putInt(Constants.EXTRA_PRACTITIONER_ID, pracList.get((int) position).hcpid);
                     bundle.putInt(Constants.EXTRA_SLOT_ID, Integer.parseInt(pracList.get((int) position).phonenumber));
                     if (isMulti) {
@@ -368,7 +368,7 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 }, throwable -> {
                     Toast.makeText(getContext(),
                             R.string.error, Toast.LENGTH_SHORT).show();
-                    Log.e("here6",throwable.getMessage());
+                    Log.e("here0",throwable.getMessage());
                     throwable.printStackTrace();
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
@@ -746,7 +746,7 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 new_appointment.slot_id = Integer.parseInt(userAppiontments.get((int) selectionposition).phonenumber);
                 Bundle bundle = new Bundle();
                 // bundle.putInt(Constants.EXTRA_SUBSERVICE_ID, query_bundle.getInt(Constants.EXTRA_SUBSERVICE_ID));
-                bundle.putInt(Constants.EXTRA_SUBSERVICE_ID, 60);
+                bundle.putInt(Constants.EXTRA_SUBSERVICE_ID, 5);
                 bundle.putInt(Constants.EXTRA_PRACTITIONER_ID, userAppiontments.get((int) selectionposition).hcpid);
                 bundle.putInt(Constants.EXTRA_SLOT_ID, Integer.parseInt(userAppiontments.get((int) selectionposition).phonenumber));
                 if (isMulti) {
@@ -766,7 +766,7 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 new_appointment.slot_id = Integer.parseInt(userAppiontments.get((int) selectionposition).phonenumber);
                 Bundle bundle2 = new Bundle();
                 // bundle.putInt(Constants.EXTRA_SUBSERVICE_ID, query_bundle.getInt(Constants.EXTRA_SUBSERVICE_ID));
-                bundle2.putInt(Constants.EXTRA_SUBSERVICE_ID, 60);
+                bundle2.putInt(Constants.EXTRA_SUBSERVICE_ID, 5);
                 bundle2.putInt(Constants.EXTRA_PRACTITIONER_ID, userAppiontments.get((int) selectionposition).hcpid);
                 bundle2.putInt(Constants.EXTRA_SLOT_ID, Integer.parseInt(userAppiontments.get((int) selectionposition).phonenumber));
                 if (isMulti) {
@@ -790,7 +790,7 @@ linTime.setOnClickListener(new View.OnClickListener() {
                     condition_ids = data.getIntArrayExtra(PatientConditionDialog.PATIENT_CONDITIONS);
 
                     PayPalPayment payment = new PayPalPayment(new BigDecimal(data.getDoubleExtra(Constants.EXTRA_FINAL_RATE, 0)),
-                            "USD", "Love on Wheels Appointment",
+                            "MYR", "mSIHAT Service Appointment",
                             PayPalPayment.PAYMENT_INTENT_SALE);
 
                     Intent intent = new Intent(this.getActivity(), PaymentActivity.class);
@@ -893,9 +893,10 @@ linTime.setOnClickListener(new View.OnClickListener() {
     }
 
     private void postNewSingleAppointment(){
-
+        if(progressDialog.isShowing())
+            progressDialog.dismiss();
         Log.e("completed","com2");
-        progressDialog.setMessage(getActivity().getString(R.string.submitting_your_booking));
+        progressDialog.setMessage("Am submitting your booking");
         progressDialog.show();
         //  Log.e("appiontme",new_appointment.additionalinformation);
 
@@ -935,7 +936,21 @@ linTime.setOnClickListener(new View.OnClickListener() {
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
 
-                    Log.e("completed","completed");
+                    Log.e("completed",String.valueOf(response.code()));
+
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
+                    builder.setMessage( "YOur appointment has been confirmed")
+                            .setCancelable(false)
+                            .setPositiveButton("OK",new DialogInterface.OnClickListener(){
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dismiss();
+                                }
+                            });
+
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
                 }
             }
 
@@ -976,6 +991,22 @@ linTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 frequency = position;
+                if(frequency > 0) {
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Switch to multi day selection")
+                            .setMessage("You have selected multi days , proceed to multi selection")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                }
+                            })
+                            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .show();
+                }
             }
 
             @Override

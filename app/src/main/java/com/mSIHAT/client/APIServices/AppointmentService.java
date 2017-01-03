@@ -5,6 +5,7 @@ import com.mSIHAT.client.models.Appointment2;
 import com.mSIHAT.client.models.ConditionPost;
 import com.mSIHAT.client.models.Feedback;
 import com.mSIHAT.client.models.MultiAppointment;
+import com.mSIHAT.client.models.views.AppointmentFullContent;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,6 +20,12 @@ import retrofit2.http.Path;
 public interface AppointmentService {
     @POST("appointments")
     Call<String> postAppointment(@Body Appointment2 appointment);
+
+
+    @POST("AppointmentDetail/getAppointmentDetails/{appointment_id}")
+    Call<AppointmentFullContent> getAppointmentDetails(@Path("appointment_id") int appointment_id);
+
+
     @POST("appointments/conditions/add")
     Call<ConditionPost> postAppointmentCondition(@Body ConditionPost condition);
 

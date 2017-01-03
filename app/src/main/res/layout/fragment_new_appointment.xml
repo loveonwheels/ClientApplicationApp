@@ -217,13 +217,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttons_layout"
         android:layout_margin="10dp"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:visibility="invisible">
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:stretchColumns="1"
-            android:paddingRight="10dp">
+            android:paddingRight="10dp"
+            android:visibility="invisible">
 
             <TableRow
                 android:layout_width="match_parent"

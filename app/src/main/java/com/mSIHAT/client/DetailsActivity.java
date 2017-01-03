@@ -77,7 +77,7 @@ public class DetailsActivity extends AppCompatActivity
 
     @Override
     public void onPatientDeleted() {
-        setResult(Activity.RESULT_OK);
+        setResult(1773);
         this.finish();
     }
 }

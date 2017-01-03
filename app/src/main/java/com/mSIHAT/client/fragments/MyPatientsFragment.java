@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -129,7 +130,10 @@ public class MyPatientsFragment extends Fragment implements ListView.OnItemClick
                         Constants.EXTRA_REGISTER_PURPOSE_PATIENT);
                 registerBundle.putInt(Constants.EXTRA_USER_ID, user_id);
                 registerPatient.putExtras(registerBundle);
+
                 startActivityForResult(registerPatient, Constants.ACTIVITY_RESULT_PATIENT_REGISTER);
+
+
                 return true;
             default:
                 return false;
@@ -139,16 +143,49 @@ public class MyPatientsFragment extends Fragment implements ListView.OnItemClick
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
+
             if (requestCode == Constants.ACTIVITY_RESULT_PATIENT_REGISTER ||
                     requestCode == Constants.ACTIVITY_RESULT_PATIENT_EDIT) {
-                Fragment frag = callingActivity.getSupportFragmentManager().findFragmentByTag(Constants.MAIN_FRAGMENT_TAG);
+                Log.e("he is here","herer");
+                reload();
+              /*  Fragment frag = callingActivity.getSupportFragmentManager().findFragmentByTag(Constants.MAIN_FRAGMENT_TAG);
                 FragmentTransaction ft = callingActivity.getSupportFragmentManager().beginTransaction();
                 ft.detach(frag).attach(frag).commit();
+*/
             }
-        }
+
+
+
     }
 
+
+    public void reload(){
+        progressDialog = new ProgressDialog(this.getContext());
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage(callingActivity.getString(R.string.retrieving_your_patients));
+        progressDialog.show();
+        Call<List<Patient>> call = restPatientService.getService().getPatientsOfUserId(user_id);
+        call.enqueue(new Callback<List<Patient>>() {
+            @Override
+            public void onResponse(Call<List<Patient>> call, Response<List<Patient>> response) {
+                MyPatientsFragment.this.patients = response.body();
+                if (patients != null) {
+                    emptyListLinear.setVisibility(View.INVISIBLE);
+                    MyPatientsFragment.this.mypatients_list.setAdapter(new MyPatientsListAdapter(MyPatientsFragment.this.getContext(), patients));
+                    MyPatientsFragment.this.mypatients_list.setOnItemClickListener(MyPatientsFragment.this);
+                } else {
+                    mypatients_list.setEmptyView(emptyListLinear);
+                }
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<Patient>> call, Throwable t) {
+                Toast.makeText(MyPatientsFragment.this.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

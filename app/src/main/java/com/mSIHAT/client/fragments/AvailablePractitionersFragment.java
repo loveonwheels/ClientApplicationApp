@@ -69,7 +69,7 @@ import rx.schedulers.Schedulers;
  */
 public class AvailablePractitionersFragment extends Fragment {
     private static PayPalConfiguration config = new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION)
             .clientId(Constants.PAYPAL_CLIENT_ID);
     private RestPractitionerService restPracService = new RestPractitionerService();
     public static final int CONDITION_DIALOG = 1;
@@ -250,7 +250,7 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
                 break;
             case CONDITION_DIALOG:
                 if(resultCode == Activity.RESULT_OK){
-                    // PAYMENT_INTENT_SALE will cause the payment to complete immediately.
+                    /// PAYMENT_INTENT_SALE will cause the payment to complete immediately.
                     // Change PAYMENT_INTENT_SALE to
                     //   - PAYMENT_INTENT_AUTHORIZE to only authorize payment and capture funds later.
                     //   - PAYMENT_INTENT_ORDER to create a payment for authorization and capture
@@ -258,7 +258,7 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
                     condition_ids = data.getIntArrayExtra(PatientConditionDialog.PATIENT_CONDITIONS);
 
                     PayPalPayment payment = new PayPalPayment(new BigDecimal(data.getDoubleExtra(Constants.EXTRA_FINAL_RATE, 0)),
-                            "USD", "Love on Wheels Appointment",
+                            "MYR", "Msihat servive appointment",
                             PayPalPayment.PAYMENT_INTENT_SALE);
 
                     Intent intent = new Intent(this.getActivity(), PaymentActivity.class);

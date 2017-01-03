@@ -7,7 +7,7 @@
     <color name="colorPrimaryLight">#a42872</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-
+    <color name="favoriteidicator">#d42b2b</color>
     <color name="outline">#ac7094</color>
     <color name="colorTextIcon">#FFFFFF</color>
     <color name="colorTabActive">#ffffff</color>
@@ -16,4 +16,5 @@
     <color name="colorTextSecondary">#727272</color>
     <color name="colorDivider">#B6B6B6</color>
     <color name="colorStar">#FFEB3B</color>
+    <color name="golden">#FFD700</color>
 </resources>

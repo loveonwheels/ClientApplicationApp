@@ -131,7 +131,7 @@ public class PatientConditionDialog extends DialogFragment implements View.OnCli
 
                     getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK,
                             getActivity().getIntent().putExtra(PATIENT_CONDITIONS, condition_ids)
-                                    .putExtra(Constants.EXTRA_FINAL_RATE, 60.00));
+                                    .putExtra(Constants.EXTRA_FINAL_RATE, 5.00));
                     this.dismiss();
                 } else {
                     Toast.makeText(PatientConditionDialog.this.getContext(),
