@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -17,6 +18,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +33,10 @@ import com.mSIHAT.client.LoginActivity;
 import com.mSIHAT.client.MainActivity;
 import com.mSIHAT.client.R;
 import com.mSIHAT.client.fragments.PractitionerDetailsFragment;
+import com.mSIHAT.client.map.LatLngInterpolator;
+import com.mSIHAT.client.models.Date.Date;
 import com.mSIHAT.client.models.Date.DateFormatter;
+import com.mSIHAT.client.models.Date.DateWithTime;
 import com.mSIHAT.client.models.Date.TimeSlotUtil;
 import com.mSIHAT.client.models.UserP;
 import com.mSIHAT.client.models.views.AppointmentFullContent;
@@ -37,6 +45,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 
@@ -58,9 +68,13 @@ public class RatingFragment extends DialogFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static final int SINGLE_TIME_DIALOG = 1221;
-private RatingBar ratingBar;
-    TextView txtdate,txttime,txtlanguage,txtname,txtgender,txtservice,txtpatient;
-    TextView ratingRequest;
+    private RatingBar ratingBar;
+    TextView txtdate,txttime,txtlanguage,txtname,txtgender;
+
+    EditText txtservice,txtpatient,txtaddress;
+    TextView ratingRequest,txtConfirmed,txtCancel,txtReSch,txtFav;
+    LinearLayout callLinear,locLinear,linearConfirm,linearCancel,linearReSch,linearFav;
+    ImageButton callBtn,locBtn,btnConfirm,btnCancel,btnReSCh,btnFav;
     CircularImageView searchView ;
     private RestPractitionerService practService = new RestPractitionerService();
     ProgressDialog progress;
@@ -71,7 +85,8 @@ private RatingBar ratingBar;
 
     private RestAppointmentService restUserService;
     private OnFragmentInteractionListener mListener;
-
+    RestUserService restUserService2 = new RestUserService();
+    AppointmentFullContent currentAppointment;
     public RatingFragment() {
         // Required empty public constructor
     }
@@ -134,13 +149,33 @@ View view = inflater.inflate(R.layout.fragment_rating, container, false);
        // ratingRequest = (TextView) view.findViewById(R.id.ratingrequest);
         txtdate = (TextView)view.findViewById(R.id.txtAppDetDate);
         txttime = (TextView)view.findViewById(R.id.txtAppDetTime);
-        txtpatient = (TextView)view.findViewById(R.id.det_patient_name);
-        txtservice = (TextView)view.findViewById(R.id.det_service_name);
-
+        txtpatient = (EditText) view.findViewById(R.id.det_patient_name);
+        txtservice = (EditText) view.findViewById(R.id.det_service_name);
+        txtaddress = (EditText) view.findViewById(R.id.det_address);
+        callLinear = (LinearLayout) view.findViewById(R.id.linearLayout8);
+        locLinear = (LinearLayout) view.findViewById(R.id.locLinear);
+        linearConfirm = (LinearLayout)view.findViewById(R.id.LinearConfirm);
+        btnConfirm = (ImageButton)view.findViewById(R.id.BtnCOnfirm);
+        txtConfirmed = (TextView) view.findViewById(R.id.TxtConfirm);
+        callBtn = (ImageButton)view.findViewById(R.id.callBtn);
+     locBtn = (ImageButton)view.findViewById(R.id.locBtn);
         searchView = (CircularImageView ) view.findViewById(R.id.det_practitioner_image);
         txtlanguage = (TextView)view.findViewById(R.id.det_practitioner_language);
                 txtname = (TextView)view.findViewById(R.id.det_practitioner_name);
                         txtgender = (TextView)view.findViewById(R.id.det_practitioner_gender);
+
+        txtCancel = (TextView)view.findViewById(R.id.TxtCancel);
+        btnCancel = (ImageButton)view.findViewById(R.id.BtnCancel);
+        linearCancel = (LinearLayout) view.findViewById(R.id.LinearCancel);
+
+        txtReSch = (TextView)view.findViewById(R.id.TxtResch);
+        btnReSCh = (ImageButton)view.findViewById(R.id.BtnReSch);
+        linearReSch = (LinearLayout) view.findViewById(R.id.LinearResch);
+
+        txtFav = (TextView)view.findViewById(R.id.TxtFav);
+        btnFav = (ImageButton)view.findViewById(R.id.BtnFav);
+        linearFav = (LinearLayout) view.findViewById(R.id.LinearFav);
+
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.my_toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -184,9 +219,54 @@ toolbar.setNavigationOnClickListener(new View.OnClickListener() {
      getinfomation();
 // To dismiss the dialog
         //progress.dismiss();
-
+        setComponents();
         return view;
     }
+
+    public void setComponents(){
+    callLinear.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            callPractitioner();
+        }
+    });
+
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPractitioner();
+            }
+        });
+
+        locBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPracLocation();
+            }
+        });
+
+        locLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPracLocation();
+            }
+        });
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRating();
+            }
+        });
+
+        linearConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRating();
+            }
+        });
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -194,6 +274,7 @@ toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             mListener.onFragmentInteraction(uri);
         }
     }
+
 
 
 public void getinfomation(){
@@ -238,6 +319,7 @@ public void getinfomation(){
 
 
    public void setInformation(AppointmentFullContent appointment) throws ParseException {
+     currentAppointment = appointment;
        txtdate.setText("Date : "+new DateFormatter(appointment.appointment_date).getDateWithDay());
        txttime.setText("Time : "+TimeSlotUtil.getTimeStringValue(appointment.appointment_time)+"     ");
 
@@ -251,12 +333,51 @@ public void getinfomation(){
        txtgender.setText(appointment.hcp_gender);
        txtlanguage.setText(appointment.hcp_qualification);
        txtname.setText(appointment.hcp_name);
-       txtpatient.setText("Patient Name : "+appointment.patient_name);
-       txtservice.setText("Service Name : "+appointment.service_name);
+       txtpatient.setText(appointment.patient_name);
+       txtservice.setText(appointment.service_name);
+       txtaddress.setText(appointment.patient_address);
+       Log.e("time",appointment.appointment_date + " " +TimeSlotUtil.getTimeStringValue(appointment.appointment_time));
+ long difference_in_span = new DateWithTime(appointment.appointment_date + " " +TimeSlotUtil.getTimeStringValue(appointment.appointment_time)).hourWithCurrent();
+       if( difference_in_span > 24){
+
+
+       }else if( difference_in_span > -2){
+
+       }else if(difference_in_span > 2){
+
+       }
+
+       if(appointment.is_favorite != 0){
+           txtFav.setEnabled(false);
+           btnFav.setEnabled(false);
+           linearFav.setEnabled(false);
+           btnFav.setImageResource(R.drawable.ic_favorite_gray_24dp);
+
+       }
+
+       if(appointment.is_rated != 0){
+           txtConfirmed.setText("Completed");
+           linearConfirm.setEnabled(false);
+           btnConfirm.setEnabled(false);
+           txtConfirmed.setEnabled(false);
+           btnConfirm.setImageResource(R.drawable.ic_done_all_gray_24dp);
+
+           linearCancel.setEnabled(false);
+           btnCancel.setEnabled(false);
+           txtCancel.setEnabled(false);
+           btnCancel.setImageResource(R.drawable.ic_highlight_remove_gray_24dp);
+
+           linearReSch.setEnabled(false);
+           btnReSCh.setEnabled(false);
+           txtReSch.setEnabled(false);
+           btnReSCh.setImageResource(R.drawable.ic_reschedule_gray);
+
+
+       }
 
        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/Roboto-Regular.ttf");
        Typeface custom_font_bold = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/DroidSans-Bold.ttf");
-       txtservice.setTypeface(custom_font);
+     /*  txtservice.setTypeface(custom_font);
        txtpatient.setTypeface(custom_font);
        txtdate.setTypeface(custom_font_bold);
        txttime.setTypeface(custom_font_bold);
@@ -264,7 +385,7 @@ public void getinfomation(){
        txtlanguage.setTypeface(custom_font);
        txtname.setTypeface(custom_font);
 
-
+*/
 
    }
     @Override
@@ -316,12 +437,46 @@ public void getinfomation(){
     public void openPracLocation(){
 
         //SelectPract singleDialog =  SelectPract.newInstance(patient_id,subservice_id,user_id);
-     /* Practitioner_Location pracLocation =  Practitioner_Location.newInstance( practitioner, appointmentid,appDet,patient);
+      Practitioner_Location pracLocation =  Practitioner_Location.newInstance(userP);
         pracLocation.setTargetFragment(RatingFragment.this, SINGLE_TIME_DIALOG);
         pracLocation.show(getActivity().getSupportFragmentManager(), "singleTimeDialog");
-        */
     }
 
+    public void openRating(){
+        RatingDialog pracLocation =  RatingDialog.newInstance(userP);
+        pracLocation.setTargetFragment(RatingFragment.this, 166899);
+        pracLocation.setCancelable(false);
+        pracLocation.show(getActivity().getSupportFragmentManager(), "singleTimeDialog");
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+            case 166899:
+
+                if (resultCode == 177899) {
+                    txtConfirmed.setText("Completed");
+                    linearConfirm.setEnabled(false);
+                    btnConfirm.setEnabled(false);
+                    txtConfirmed.setEnabled(false);
+                    btnConfirm.setImageResource(R.drawable.ic_done_all_gray_24dp);
+
+                    linearCancel.setEnabled(false);
+                    btnCancel.setEnabled(false);
+                    txtCancel.setEnabled(false);
+                    btnCancel.setImageResource(R.drawable.ic_highlight_remove_gray_24dp);
+
+                    linearReSch.setEnabled(false);
+                    btnReSCh.setEnabled(false);
+                    txtReSch.setEnabled(false);
+                    btnReSCh.setImageResource(R.drawable.ic_reschedule_gray);
+                }
+
+                break;
+        }
+
+}
 
     public void callPractitioner(){
         String uri = "tel:" + userP.hcp_phonenumber;
@@ -329,5 +484,8 @@ public void getinfomation(){
         intentCall.setData(Uri.parse(uri));
         startActivity(intentCall);
     }
+
+
+
 
 }

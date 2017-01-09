@@ -174,7 +174,7 @@ GoogleMap.OnCameraMoveListener,
                 .getLastLocation(mGoogleApiClient);
 if(mCurrentLocation != null){
    initCamera(mCurrentLocation);
-    setMarker();
+    //setMarker();
 }else{
 
 
@@ -242,9 +242,9 @@ if(mCurrentLocation != null){
                 .tilt(0.0f)
                 .build();
 
-      /*  getMap().animateCamera(CameraUpdateFactory
+       getMap().animateCamera(CameraUpdateFactory
                 .newCameraPosition(position), null);
-*/
+
 
 
         // mMap.setMapType(MAP_TYPES[curMapTypeIndex]);
@@ -280,7 +280,7 @@ if(mCurrentLocation != null){
 
 
 
-                LatLng sydney = new LatLng(4.2105, 101);
+                LatLng sydney = new LatLng( 101,4.2105);
 
                 // Add a marker in Sydney and move the camera
 
@@ -300,7 +300,7 @@ if(mCurrentLocation != null){
                  marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.hcpiconmap));
                 mMap.addMarker(marker);
 
-                //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                 mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
                 //  initListeners();
 
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -340,7 +340,7 @@ if(mCurrentLocation != null){
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMinZoomPreference(5.0f);
-        mMap.setMaxZoomPreference(14.0f);
+       // mMap.setMaxZoomPreference(20.0f);
 
         /*
 Log.e("sdfdsf","map1");
@@ -398,7 +398,7 @@ Log.e("sdfdsf","map1");
 
 */
 
-
+        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(4.2105,101) , 14.0f) );
 
 
     }
@@ -413,7 +413,7 @@ Log.e("sdfdsf","map1");
     @Override
     public void onLocationChanged(Location location) {
      //   CameraUpdateFactory.newLatLngBounds(bounds, 0)
-       // initCamera(location);
+        initCamera(location);
     }
 
 

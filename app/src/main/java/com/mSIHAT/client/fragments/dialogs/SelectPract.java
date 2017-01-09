@@ -54,10 +54,10 @@ import com.mSIHAT.client.models.address.Postcode;
 import com.mSIHAT.client.models.views.PractitionerAvailable;
 import com.mSIHAT.client.utils.Constants;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
+//import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
+//import com.paypal.android.sdk.payments.PaymentActivity;
+//import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import org.json.JSONException;
 
@@ -781,6 +781,8 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 Log.e("paypal is here","com3");
 
                 if(resultCode == Activity.RESULT_OK){
+
+                    /*
                     Log.e("completeddf","cofdf");
                     // PAYMENT_INTENT_SALE will cause the payment to complete immediately.
                     // Change PAYMENT_INTENT_SALE to
@@ -801,9 +803,13 @@ linTime.setOnClickListener(new View.OnClickListener() {
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
 
                     startActivityForResult(intent, PAYMENT_REQUEST_CODE);
+
+                    */
                 }
                 break;
             case PAYMENT_REQUEST_CODE:
+
+                /*
                 Log.e("completed","com3");
                 if(resultCode == Activity.RESULT_OK){
                     Log.e("completed","com4");
@@ -851,6 +857,8 @@ linTime.setOnClickListener(new View.OnClickListener() {
                 else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
                     Log.i("payment_paypal", "An invalid Payment or PayPalConfiguration was submitted. Refer to the documentation.");
                 }
+
+                */
                 break;
             default:
                 break;

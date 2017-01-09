@@ -21,7 +21,7 @@ public interface UserService {
     Call<UserP> validateLogin(@Path("email") String email, @Path("password") String password);
 
     @GET("AppCom/ConfirmCompletedappointment")
-    Call<Boolean> ConComsccepted (@Query("appointmentid") int appointmentid);
+    Call<Boolean> ConComsccepted (@Query("appointmentid") int appointmentid,@Query("rating") int rating,@Query("comment") String comment);
 
     @POST("Users/Signup")
     Call<UserP> createUser(@Body UserP user);

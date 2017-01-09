@@ -61,6 +61,7 @@ public class NewAppointmentFragment extends Fragment implements View.OnClickList
 
     private int user_id;
 
+
     private RestForServices servicesRest;
     private RestPatientService patientRest;
 

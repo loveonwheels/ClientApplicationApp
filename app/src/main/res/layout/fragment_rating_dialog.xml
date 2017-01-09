@@ -1,0 +1,87 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mSIHAT.client.fragments.dialogs.RatingDialog"
+    android:background="@drawable/background">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Please rate me."
+            android:id="@+id/ratingTexT"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:textSize="16dp" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBarDialog"
+            android:layout_gravity="center_horizontal"
+            android:progressDrawable="@drawable/ratingbar"
+            android:stepSize="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Any additional comment"
+            android:id="@+id/textView34"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/ratingComment"
+            android:layout_gravity="top|center_horizontal|right"
+            android:lines="4"
+            android:gravity="top"
+            android:background="#ffffff"
+            android:layout_margin="10dp"
+            android:textColor="#030303"
+            android:textSize="16dp"
+            android:padding="5dp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="CANCEL"
+                    android:id="@+id/ratingCan"
+                    android:layout_column="0"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="#fff"
+                    android:textSize="14dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONFIRM"
+                    android:id="@+id/ratingCon"
+                    android:layout_column="1"
+                    android:background="@color/colorPrimary"
+                    android:textColor="#fff"
+                    android:singleLine="true"
+                    android:textSize="14dp" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+</FrameLayout>

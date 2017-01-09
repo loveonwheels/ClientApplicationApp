@@ -193,8 +193,10 @@ LinearLayout btn_location_div;
     public void openPracLocation(){
 
         //SelectPract singleDialog =  SelectPract.newInstance(patient_id,subservice_id,user_id);
-        Practitioner_Location pracLocation =  Practitioner_Location.newInstance( practitioner, appointmentid,appDet,patient);
+       /* Practitioner_Location pracLocation =  Practitioner_Location.newInstance( practitioner, appointmentid,appDet,patient);
         pracLocation.setTargetFragment(PractitionerDetailsFragment.this, SINGLE_TIME_DIALOG);
         pracLocation.show(getActivity().getSupportFragmentManager(), "singleTimeDialog");
+
+        */
     }
 }

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mSIHAT.client" android:windowSoftInputMode="stateVisible|adjustPan|adjustResize">
 
+    <!-- Required permissions for all integrations -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,6 +18,16 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
+    <!-- Required to use PayPal -->
+    <activity android:name="com.paypal.android.sdk.payments.PayPalProfileSharingActivity" />
+    <activity android:name="com.paypal.android.sdk.payments.ProfileSharingConsentActivity" />
+    <activity android:name="com.paypal.android.sdk.payments.FuturePaymentInfoActivity" />
+    <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
+    <service android:name="com.paypal.android.sdk.payments.PayPalService"
+        android:exported="false" />
+
+    <!-- Required to use 3D Secure -->
+    <activity android:name="com.braintreepayments.api.threedsecure.ThreeDSecureWebViewActivity" />
 
 
     <application
@@ -31,6 +44,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_api_key2"/>
+
+
 
         <activity
             android:name="com.mSIHAT.client.LoginActivity"
@@ -105,7 +120,8 @@
 
             <action android:name="UpdateLocation"/>
         </receiver>
-
+        <receiver android:name='com.mSIHAT.client.AlarmService.AlarmManagerBroadcastReceiver'>
+        </receiver>
         <service
             android:name=".Notification.FireIDService">
             <intent-filter>

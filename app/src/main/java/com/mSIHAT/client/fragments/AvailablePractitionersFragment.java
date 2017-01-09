@@ -41,10 +41,10 @@ import com.mSIHAT.client.models.Practitioner;
 import com.mSIHAT.client.models.views.PractitionerAvailable;
 import com.mSIHAT.client.utils.Constants;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
+//import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
+//import com.paypal.android.sdk.payments.PaymentActivity;
+//import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import org.json.JSONException;
 
@@ -249,7 +249,7 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
 
                 break;
             case CONDITION_DIALOG:
-                if(resultCode == Activity.RESULT_OK){
+               /* if(resultCode == Activity.RESULT_OK){
                     /// PAYMENT_INTENT_SALE will cause the payment to complete immediately.
                     // Change PAYMENT_INTENT_SALE to
                     //   - PAYMENT_INTENT_AUTHORIZE to only authorize payment and capture funds later.
@@ -269,10 +269,11 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
 
                     startActivityForResult(intent, PAYMENT_REQUEST_CODE);
-                }
+                }*/
                 break;
             case PAYMENT_REQUEST_CODE:
-                if(resultCode == Activity.RESULT_OK){
+               /*  if(resultCode == Activity.RESULT_OK){
+
                     PaymentConfirmation confirm_payment = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                     if(confirm_payment != null){
                         try {
@@ -301,7 +302,9 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
                         } catch (JSONException e) {
                             Log.e("payment_paypal", "error: ", e);
                         }
-                    }
+                        }
+
+
                 }
                 else if (resultCode == Activity.RESULT_CANCELED) {
                     Log.i("payment_paypal", "The user canceled.");
@@ -309,6 +312,7 @@ int unavailableslot[] = new int[userAppiontments.get(position).unavailableslot.s
                 else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
                     Log.i("payment_paypal", "An invalid Payment or PayPalConfiguration was submitted. Refer to the documentation.");
                 }
+                */
                 break;
             default:
                 break;

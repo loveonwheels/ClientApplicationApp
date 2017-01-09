@@ -77,7 +77,7 @@ btnConfirm = (Button)view.findViewById(R.id.button4);
             @Override
             public void onClick(View v) {
 
-                Call<Boolean> call = restUserService.getService().ConComsccepted(appointmentDetails.appointment_id);
+                Call<Boolean> call = restUserService.getService().ConComsccepted(appointmentDetails.appointment_id,1,"Sdsd");
                 call.enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {

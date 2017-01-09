@@ -76,6 +76,15 @@ public interface PractitionerService {
     Call<Boolean> makefavorite(@Query("practitionerid") int practitionerid,@Query("appointmentid") int appointmentid
     );
 
+    @GET("Payment/GetToken")
+    Call<String> gettoken(@Query("userid") int userid
+    );
+
+    @POST("Payment/SendNounce")
+    Call<Boolean> sendnounce(@Query("userid") int userid,@Query("key") String key
+    );
+
+
     @PUT("Favourite/GetPractitioners")
     Call<List<Practitioner>> getmyfavourite(@Query("user_id") int userid
     );

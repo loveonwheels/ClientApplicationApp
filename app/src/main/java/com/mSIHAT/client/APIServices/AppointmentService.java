@@ -4,6 +4,7 @@ import com.mSIHAT.client.models.Appointment;
 import com.mSIHAT.client.models.Appointment2;
 import com.mSIHAT.client.models.ConditionPost;
 import com.mSIHAT.client.models.Feedback;
+import com.mSIHAT.client.models.LocationUpdate2;
 import com.mSIHAT.client.models.MultiAppointment;
 import com.mSIHAT.client.models.views.AppointmentFullContent;
 
@@ -12,7 +13,9 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by alamchristian on 3/23/16.
@@ -24,6 +27,16 @@ public interface AppointmentService {
 
     @POST("AppointmentDetail/getAppointmentDetails/{appointment_id}")
     Call<AppointmentFullContent> getAppointmentDetails(@Path("appointment_id") int appointment_id);
+
+
+    @PUT("Hcp_Location/getlocation")
+    Call<LocationUpdate2> getLocation(@Query("hcp_id") int hcp_id);
+
+
+
+    @POST("Payment/SendNounce")
+    Call<Boolean> sendnounce(@Query("userid") int userid, @Query("key") String key
+    );
 
 
     @POST("appointments/conditions/add")
