@@ -22,7 +22,7 @@ public class Date {
 
     public Date(String dat) throws ParseException {
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         Calendar cal  = Calendar.getInstance();
         cal.setTime(df.parse(dat));
         this.day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));

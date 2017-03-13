@@ -782,6 +782,47 @@ linTime.setOnClickListener(new View.OnClickListener() {
 
                 if(resultCode == Activity.RESULT_OK){
 
+
+                        Log.e("completed","com4");
+
+
+                            Log.e("completed","completed");
+                            try {
+
+                                Log.e("fdfdfdf2323","dfdfdf1234");
+                                new_appointment.patient_id = query_bundle.getInt(Constants.EXTRA_PATIENT_ID);
+                                Log.e("fdfdfdf2323","dfdfdf123");
+                                new_appointment.status = 1;
+
+                                new_appointment.subservice_id = query_bundle.getInt(Constants.EXTRA_SUBSERVICE_ID);
+
+                                new_appointment.patient_id = query_bundle.getInt(Constants.EXTRA_PATIENT_ID);
+
+                                Log.e("sub",String.valueOf(new_appointment.subservice_id));
+                                Log.e("patient",String.valueOf(query_bundle.getInt(Constants.EXTRA_PATIENT_ID)));
+                                ;
+
+                                new_appointment.appointment_date = input_sch_date.getText().toString();
+
+
+
+                                new_appointment.appointment_start_time = starttime.getTimevalue();
+                                new_appointment.appointment_end_time = (starttime.getTimevalue()+1);
+                                appointmentService = new RestAppointmentService();
+
+                                if(isMulti){
+                                    postNewMultiAppointment();
+                                } else {
+                                    postNewSingleAppointment();
+                                }
+
+                            } catch (Exception e) {
+                                Log.e("payment_paypal", "error: ", e);
+                            }
+
+
+
+                    Log.e("paypal is done","com3");
                     /*
                     Log.e("completeddf","cofdf");
                     // PAYMENT_INTENT_SALE will cause the payment to complete immediately.

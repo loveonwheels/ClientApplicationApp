@@ -12,6 +12,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.mSIHAT.client.MainActivity;
 import com.mSIHAT.client.R;
 
+import java.util.Date;
+
 public class FireMsgService extends FirebaseMessagingService {
 
 
@@ -19,7 +21,7 @@ public class FireMsgService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
  
-        Log.d("Msg", "Message received ["+remoteMessage+"]");
+        Log.e("Msg", "Message received ["+remoteMessage+"]");
  
         // Create Notification
         Intent intent = new Intent(this, MainActivity.class);
@@ -29,7 +31,7 @@ public class FireMsgService extends FirebaseMessagingService {
  
         NotificationCompat.Builder notificationBuilder = new
                  NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.hcpicon)
+                .setSmallIcon(R.drawable.hcpicon2)
                 .setContentTitle(remoteMessage.getNotification().getTitle())
                 .setContentText(remoteMessage.getNotification().getBody())
                 .setAutoCancel(true)
@@ -38,13 +40,14 @@ public class FireMsgService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) 
                 getSystemService(Context.NOTIFICATION_SERVICE);
- 
-        notificationManager.notify(1410, notificationBuilder.build());
+
+        int m = (int)((new Date().getTime()/ 1000L) % Integer.MAX_VALUE);
+        notificationManager.notify(m, notificationBuilder.build());
 
         Intent intent2 = new Intent();
         intent2.setAction("UpdateLocation");
         intent2.putExtra("DATAPASSED", 3);
         sendBroadcast(intent2);
-        Log.d("msg1","sent");
+        Log.e("msg1","sent");
     }
 }

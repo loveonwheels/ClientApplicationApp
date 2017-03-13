@@ -79,7 +79,10 @@ public class AvailablePractitionersListAdapter extends BaseAdapter {
 
 
         text_nric.setText(this.practitioners.get(position).gender+ " | "+separated[0]);
-        text_gender.setText("Certified "+separated[1]);
+        if(separated.length > 1){
+            text_gender.setText("Certified "+separated[1]);
+        }
+
         text_language.setText(this.practitioners.get(position).language);
 
         text_expertise.setText(String.valueOf(this.practitioners.get(position).rating));

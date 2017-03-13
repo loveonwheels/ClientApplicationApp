@@ -267,10 +267,9 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="10dp"
-                                        android:id="@+id/textView28"
+                                        android:id="@+id/TxtCall"
                                         android:textAlignment="center"
                                         android:text="Call"
-                                        android:textColor="#1a2e4d"
                                         android:singleLine="true" />
                                 </LinearLayout>
 
@@ -297,9 +296,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Location"
-                                        android:id="@+id/textView30"
+                                        android:id="@+id/TxtLoc"
                                         android:textAlignment="center"
-                                        android:textColor="#1a2e4d"
                                         android:singleLine="true" />
                                 </LinearLayout>
                             </TableRow>

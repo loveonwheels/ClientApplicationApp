@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.braintreepayments.api.dropin.BraintreePaymentActivity;
+import com.braintreepayments.api.dropin.Customization;
 import com.mSIHAT.client.APIServices.RestPractitionerService;
 import com.mSIHAT.client.R;
 import com.braintreepayments.*;
@@ -89,7 +90,11 @@ public class Welcomepage extends Fragment {
               //  FragmentManager fm = getActivity().getSupportFragmentManager();
 
 
-                getToken(1);
+                //getToken(1);
+                String url = "http://www.msihat_.com/clienttakeatour";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
 
             }
         });
@@ -128,8 +133,18 @@ public class Welcomepage extends Fragment {
 
 
     public void onBraintreeSubmit(String token) {
+
+        Customization customization = new Customization.CustomizationBuilder()
+                .primaryDescription("Cart")
+                .secondaryDescription("3 Items")
+                .amount("$35")
+                .submitButtonText("Confirm")
+                .build();
+
+
+
         Intent intent = new Intent(getActivity(), BraintreePaymentActivity.class)
-        .putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN,token);
+        .putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN,token).putExtra(BraintreePaymentActivity.EXTRA_CUSTOMIZATION, customization);
         startActivityForResult(intent, REQUEST_CODE);
     }
 

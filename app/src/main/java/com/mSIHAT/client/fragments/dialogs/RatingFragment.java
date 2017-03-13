@@ -72,7 +72,7 @@ public class RatingFragment extends DialogFragment {
     TextView txtdate,txttime,txtlanguage,txtname,txtgender;
 
     EditText txtservice,txtpatient,txtaddress;
-    TextView ratingRequest,txtConfirmed,txtCancel,txtReSch,txtFav;
+    TextView ratingRequest,txtConfirmed,txtCancel,txtReSch,txtFav,txtCall,txtLoc;
     LinearLayout callLinear,locLinear,linearConfirm,linearCancel,linearReSch,linearFav;
     ImageButton callBtn,locBtn,btnConfirm,btnCancel,btnReSCh,btnFav;
     CircularImageView searchView ;
@@ -149,6 +149,8 @@ View view = inflater.inflate(R.layout.fragment_rating, container, false);
        // ratingRequest = (TextView) view.findViewById(R.id.ratingrequest);
         txtdate = (TextView)view.findViewById(R.id.txtAppDetDate);
         txttime = (TextView)view.findViewById(R.id.txtAppDetTime);
+        txtLoc = (TextView)view.findViewById(R.id.TxtLoc);
+        txtCall = (TextView)view.findViewById(R.id.TxtCall);
         txtpatient = (EditText) view.findViewById(R.id.det_patient_name);
         txtservice = (EditText) view.findViewById(R.id.det_service_name);
         txtaddress = (EditText) view.findViewById(R.id.det_address);
@@ -265,6 +267,21 @@ toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 openRating();
             }
         });
+
+        btnFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makefavorite();
+            }
+        });
+
+        linearFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makefavorite();
+            }
+        });
+
     }
 
 
@@ -337,14 +354,41 @@ public void getinfomation(){
        txtservice.setText(appointment.service_name);
        txtaddress.setText(appointment.patient_address);
        Log.e("time",appointment.appointment_date + " " +TimeSlotUtil.getTimeStringValue(appointment.appointment_time));
- long difference_in_span = new DateWithTime(appointment.appointment_date + " " +TimeSlotUtil.getTimeStringValue(appointment.appointment_time)).hourWithCurrent();
+ long difference_in_span = new DateWithTime(appointment.appointment_date,appointment.appointment_time).hourWithCurrent();
+       Log.e("time",String.valueOf(difference_in_span));
        if( difference_in_span > 24){
+           Log.e("time",String.valueOf(1));
+           txtCall.setEnabled(false);
+           txtLoc.setEnabled(false);
+           callLinear.setEnabled(false);
+           callBtn.setEnabled(false);
+           locBtn.setEnabled(false);
+           locLinear.setEnabled(false);
+          callBtn.setImageResource(R.drawable.ic_call_gray);
+           locBtn.setImageResource(R.drawable.ic_pin_drop_gray_24dp);
+       }else if( difference_in_span < -2){
+           Log.e("time",String.valueOf(2));
+           txtCall.setEnabled(false);
+           txtLoc.setEnabled(false);
+           callLinear.setEnabled(false);
+           callBtn.setEnabled(false);
+           locBtn.setEnabled(false);
+           locLinear.setEnabled(false);
+           callBtn.setImageResource(R.drawable.ic_call_gray);
+           locBtn.setImageResource(R.drawable.ic_pin_drop_gray_24dp);
+       }else if(difference_in_span >= 2){
+           Log.e("time",String.valueOf(3));
+           txtLoc.setEnabled(false);
+           locBtn.setEnabled(false);
+           locLinear.setEnabled(false);
+           locBtn.setImageResource(R.drawable.ic_pin_drop_gray_24dp);
+       }
 
-
-       }else if( difference_in_span > -2){
-
-       }else if(difference_in_span > 2){
-
+       if(difference_in_span >= -48 ){
+           linearReSch.setEnabled(false);
+           btnReSCh.setEnabled(false);
+           txtReSch.setEnabled(false);
+           btnReSCh.setImageResource(R.drawable.ic_reschedule_gray);
        }
 
        if(appointment.is_favorite != 0){
@@ -419,7 +463,10 @@ public void getinfomation(){
 
                 }
                 else {
-
+                    txtFav.setEnabled(false);
+                    btnFav.setEnabled(false);
+                    linearFav.setEnabled(false);
+                    btnFav.setImageResource(R.drawable.ic_favorite_gray_24dp);
                    // btn_favorite.setVisibility(View.INVISIBLE);
                     Log.e("completed token",String.valueOf(response.code()));
                 }
